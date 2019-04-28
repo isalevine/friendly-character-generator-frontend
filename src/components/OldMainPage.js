@@ -1,11 +1,11 @@
-import React, {Component, Fragment} from 'react';
+import React, {Fragment} from 'react';
 
 
 const OldMainPage = () => {
 
   return(
     <Fragment>
-      <div style={{"border-style": "solid", "border-width": "3px", "border-radius": "5px", "border-color": "blue"}}>
+      <div style={{"borderStyle": "solid", "borderWidth": "3px", "borderRadius": "5px", "borderColor": "blue"}}>
 
 
           <em>Old Main Page - from backend/app/views/pages/main.erb</em>

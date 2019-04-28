@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
-import logo from './logo.svg';
 import './App.css';
+
 import OldMainPage from './components/OldMainPage'
+import FormContainer from './containers/FormContainer'
+
 
 class App extends Component {
 
@@ -14,6 +16,8 @@ class App extends Component {
         <br /><br /><br />
 
         <OldMainPage />
+
+        <FormContainer />
       </Fragment>
     )
   }

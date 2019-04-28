@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
 
-import OldMainPage from './components/OldMainPage'
-import FormContainer from './containers/FormContainer'
+// import OldMainPage from './components/OldMainPage'
+import GridContainer from './containers/GridContainer'
 
 
 class App extends Component {
@@ -15,9 +15,8 @@ class App extends Component {
 
         <br /><br /><br />
 
-        <OldMainPage />
 
-        <FormContainer />
+        <GridContainer />
       </Fragment>
     )
   }

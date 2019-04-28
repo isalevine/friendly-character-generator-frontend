@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react'
 
 
+// keep disabled until Filters are ready to be implemented
+
 class FilterForm extends Component {
 
   render() {

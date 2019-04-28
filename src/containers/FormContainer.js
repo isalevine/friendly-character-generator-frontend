@@ -16,7 +16,7 @@ class FormContainer extends Component {
       <Fragment>
 
         <StatForm />
-
+        <PowerForm />
 
       </Fragment>
     )

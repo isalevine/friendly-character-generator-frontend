@@ -35,15 +35,23 @@ class StatForm extends Component {
 
     return (
       <Fragment>
-        <form id="select-stat-form" onChange={this.handleChange}>
-          1. When playing, I prefer to...<br />
-          <input type="radio" name="select-stat-form" value="physical" />fight!<br />
-          <input type="radio" name="select-stat-form" value="mental" />think and solve puzzles!<br />
-          <input type="radio" name="select-stat-form" value="social" />talk as my character!<br />
-        </form>
+        <div className="card" style={{"gridColumnStart": 2}}>
+          <div className="card-text">
+            <form id="select-stat-form" onChange={this.handleChange}>
+              1. When playing, I prefer to...<br />
+              <input type="radio" name="select-stat-form" value="physical" />fight!<br />
+              <input type="radio" name="select-stat-form" value="mental" />think and solve puzzles!<br />
+              <input type="radio" name="select-stat-form" value="social" />talk as my character!<br />
+            </form>
 
-        {selectedStatForm}
+            <br />
 
+            <div className="card-subtext">
+              {selectedStatForm}
+            </div>
+
+          </div>
+        </div>
       </Fragment>
     )
   }

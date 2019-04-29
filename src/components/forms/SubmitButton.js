@@ -3,6 +3,10 @@ import React, {Component, Fragment} from 'react'
 
 class SubmitButton extends Component {
 
+  handleClick = () => {
+    this.props.createSearchList()
+  }
+
   render() {
     return (
       <Fragment>

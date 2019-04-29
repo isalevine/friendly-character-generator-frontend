@@ -3,10 +3,17 @@ import React, {Component, Fragment} from 'react'
 
 class MentalStatForm extends Component {
 
+  handleChange = (ev) => {
+    this.props.changeSearchList("action_preference", ev.target.value)
+    if (this.props.nextCard === 2) {
+      this.props.flipCard(this.props.nextCard)
+    }
+  }
+
   render() {
     return (
       <Fragment>
-        <form id="mental-stat-form">
+        <form id="mental-stat-form" onChange={this.handleChange}>
           b. When thinking and solving puzzles, I like to...<br />
         <input type="radio" name="mental-stat-form" value="wisdom" />cast lots of spells! / use lots of technology!<br />
           <input type="radio" name="mental-stat-form" value="wisdom" />find clues and notice important details!<br />

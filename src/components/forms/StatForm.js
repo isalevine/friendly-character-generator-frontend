@@ -7,30 +7,34 @@ import SocialStatForm from './SocialStatForm'
 
 class StatForm extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      selectedStat: null
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(ev) {
-    this.setState({selectedStat: ev.target.value})
+  handleChange = (ev) => {
+    this.props.changeSearchList("stat_preference", ev.target.value)
   }
 
 
   render() {
 
     let selectedStatForm = <Fragment />;
-    if (this.state.selectedStat === "physical") {
-      selectedStatForm = <PhysicalStatForm />
+    if (this.props.formSearchList.stat_preference === "physical") {
+      selectedStatForm = <PhysicalStatForm
+        nextCard={this.props.nextCard}
+        flipCard={this.props.flipCard}
+        changeSearchList={this.props.changeSearchList}
+      />
     }
-    else if (this.state.selectedStat === "mental") {
-      selectedStatForm = <MentalStatForm />
+    else if (this.props.formSearchList.stat_preference === "mental") {
+      selectedStatForm = <MentalStatForm
+        nextCard={this.props.nextCard}
+        flipCard={this.props.flipCard}
+        changeSearchList={this.props.changeSearchList}
+      />
     }
-    else if (this.state.selectedStat === "social") {
-      selectedStatForm = <SocialStatForm />
+    else if (this.props.formSearchList.stat_preference === "social") {
+      selectedStatForm = <SocialStatForm
+        nextCard={this.props.nextCard}
+        flipCard={this.props.flipCard} 
+        changeSearchList={this.props.changeSearchList}
+      />
     }
 
     return (

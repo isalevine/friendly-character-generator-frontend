@@ -3,10 +3,17 @@ import React, {Component, Fragment} from 'react'
 
 class PhysicalStatForm extends Component {
 
+  handleChange = (ev) => {
+    this.props.changeSearchList("action_preference", ev.target.value)
+    if (this.props.nextCard === 2) {
+      this.props.flipCard(this.props.nextCard)
+    }
+  }
+
   render() {
     return (
       <Fragment>
-        <form id="physical-stat-form">
+        <form id="physical-stat-form" onChange={this.handleChange}>
           a. When fighting, I like to...<br />
         <input type="radio" name="physical-stat-form" value="strength" />deal lots of damage with my weapon!<br />
           <input type="radio" name="physical-stat-form" value="stamina" />take lots of damage and never die!<br />

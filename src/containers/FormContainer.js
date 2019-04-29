@@ -19,7 +19,9 @@ class FormContainer extends Component {
     super()
     this.state = {
       formSearchList: {
-
+        stat_preference: "",
+        action_preference: "",
+        power_preference: ""
       },
       flipCard1: false,
       flipCard2: false,
@@ -28,6 +30,8 @@ class FormContainer extends Component {
       nextCard: 1
     }
     this.flipCard = this.flipCard.bind(this)
+    this.changeSearchList = this.changeSearchList.bind(this)
+    this.createSearchList = this.createSearchList.bind(this)
   }
 
   flipCard(num) {
@@ -41,7 +45,17 @@ class FormContainer extends Component {
         nextCard: nextNum
       })
     }
+  }
 
+  changeSearchList(preference, value) {
+    let obj = {...this.state.formSearchList}
+    obj[preference] = value
+    this.setState({formSearchList: obj})
+  }
+
+  createSearchList(formObject) {
+    // export finalized this.state.formSearchList
+    // to create a new SearchList instance
   }
 
 
@@ -49,10 +63,20 @@ class FormContainer extends Component {
 
     let card1, card2, card3, card4;
     if (this.state.flipCard1) {
-      card1 = <StatForm style={{"gridColumnStart": 36}} />
+      card1 = <StatForm style={{"gridColumnStart": 36}}
+        nextCard={this.state.nextCard}
+        flipCard={this.flipCard}
+        formSearchList={this.state.formSearchList}
+        changeSearchList={this.changeSearchList}
+      />
     }
     if (this.state.flipCard2) {
-      card2 = <PowerForm style={{"gridColumnStart": 63}} />
+      card2 = <PowerForm style={{"gridColumnStart": 63}}
+        nextCard={this.state.nextCard}
+        flipCard={this.flipCard}
+        changeSearchList={this.changeSearchList}
+        createSearchList={this.createSearchList}
+      />
     }
     if (this.state.flipCard3) {
       card3 = <BlankCard style={{"gridColumnStart": 90}} />
@@ -72,16 +96,18 @@ class FormContainer extends Component {
               style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 6}}
               flipCard={this.flipCard}
               nextCard={this.state.nextCard}
-              />
+            />
         </div>
 
         {card1}
         {card2}
         {card3}
         {card4}
-        
 
-        <SearchListOutput style={{"gridColumnStart": 8, "gridRowStart": 46}} />
+
+        <SearchListOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
+          formSearchList={this.state.formSearchList}
+        />
 
       </Fragment>
     )

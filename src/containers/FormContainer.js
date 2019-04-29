@@ -10,7 +10,7 @@ import FilterForm from '../components/forms/FilterForm'
 import CardDeck from '../components/forms/CardDeck'
 import BlankCard from '../components/forms/BlankCard'
 import ClickHereMessage from '../components/forms/ClickHereMessage'
-import SearchListOutput from '../components/forms/SearchListOutput'
+import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 
 
 class FormContainer extends Component {
@@ -18,7 +18,7 @@ class FormContainer extends Component {
   constructor() {
     super()
     this.state = {
-      formSearchList: {
+      formSearchPreference: {
         stat_preference: "",
         action_preference: "",
         power_preference: ""
@@ -30,8 +30,8 @@ class FormContainer extends Component {
       nextCard: 1
     }
     this.flipCard = this.flipCard.bind(this)
-    this.changeSearchList = this.changeSearchList.bind(this)
-    this.createSearchList = this.createSearchList.bind(this)
+    this.changeSearchPreference = this.changeSearchPreference.bind(this)
+    this.createSearchPreference = this.createSearchPreference.bind(this)
   }
 
   flipCard(num) {
@@ -47,15 +47,29 @@ class FormContainer extends Component {
     }
   }
 
-  changeSearchList(preference, value) {
-    let obj = {...this.state.formSearchList}
+  changeSearchPreference(preference, value) {
+    let obj = {...this.state.formSearchPreference}
     obj[preference] = value
-    this.setState({formSearchList: obj})
+    this.setState({formSearchPreference: obj})
   }
 
-  createSearchList(formObject) {
-    // export finalized this.state.formSearchList
-    // to create a new SearchList instance
+  createSearchPreference(formSearchPreference) {
+    console.log("formSearchPreference: ", formSearchPreference)
+    let url = "http://localhost:3000/api/v1/" + "/search_preferences"
+    let config = {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formSearchPreference)
+    }
+
+    fetch(url, config)
+    .then(res => res.json())
+    .then(data => {
+      console.log("data: ", data)
+    })
   }
 
 
@@ -66,16 +80,17 @@ class FormContainer extends Component {
       card1 = <StatForm style={{"gridColumnStart": 36}}
         nextCard={this.state.nextCard}
         flipCard={this.flipCard}
-        formSearchList={this.state.formSearchList}
-        changeSearchList={this.changeSearchList}
+        formSearchPreference={this.state.formSearchPreference}
+        changeSearchPreference={this.changeSearchPreference}
       />
     }
     if (this.state.flipCard2) {
       card2 = <PowerForm style={{"gridColumnStart": 63}}
         nextCard={this.state.nextCard}
         flipCard={this.flipCard}
-        changeSearchList={this.changeSearchList}
-        createSearchList={this.createSearchList}
+        formSearchPreference={this.state.formSearchPreference}
+        changeSearchPreference={this.changeSearchPreference}
+        createSearchPreference={this.createSearchPreference}
       />
     }
     if (this.state.flipCard3) {
@@ -105,8 +120,8 @@ class FormContainer extends Component {
         {card4}
 
 
-        <SearchListOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
-          formSearchList={this.state.formSearchList}
+        <SearchPreferenceOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
+          formSearchPreference={this.state.formSearchPreference}
         />
 
       </Fragment>

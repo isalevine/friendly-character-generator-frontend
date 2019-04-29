@@ -5,6 +5,10 @@ import './App.css';
 import GridContainer from './containers/GridContainer'
 
 
+// const API_URL = "http://localhost:3000/api/v1/"
+// => global variable not working? (specifically in fetch() in FormContainer)
+
+
 class App extends Component {
 
   render() {

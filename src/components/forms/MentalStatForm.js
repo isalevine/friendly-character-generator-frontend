@@ -4,7 +4,7 @@ import React, {Component, Fragment} from 'react'
 class MentalStatForm extends Component {
 
   handleChange = (ev) => {
-    this.props.changeSearchList("action_preference", ev.target.value)
+    this.props.changeSearchPreference("action_preference", ev.target.value)
     if (this.props.nextCard === 2) {
       this.props.flipCard(this.props.nextCard)
     }

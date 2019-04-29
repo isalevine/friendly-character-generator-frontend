@@ -6,7 +6,7 @@ import SubmitButton from './SubmitButton'
 class PowerForm extends Component {
 
   handleChange = (ev) => {
-    this.props.changeSearchList("power_preference", ev.target.value)
+    this.props.changeSearchPreference("power_preference", ev.target.value)
     if (this.props.nextCard === 3) {
       this.props.flipCard(this.props.nextCard)
     }
@@ -16,7 +16,10 @@ class PowerForm extends Component {
 
     let button;
     if (this.props.nextCard === 4) {
-      button = <SubmitButton createSearchList={this.props.createSearchList} />
+      button = <SubmitButton
+        formSearchPreference={this.props.formSearchPreference}
+        createSearchPreference={this.props.createSearchPreference}
+      />
     }
 
     return (

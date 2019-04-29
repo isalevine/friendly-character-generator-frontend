@@ -10,11 +10,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div>Hi</div>
-        <p><strong>This is from App.js</strong></p>
-
-        <br /><br /><br />
-
+        <div className="header navbar">Hi
+          <p><strong>This is from App.js</strong></p>
+        </div>
 
         <GridContainer />
       </Fragment>

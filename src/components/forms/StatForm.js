@@ -35,7 +35,7 @@ class StatForm extends Component {
 
     return (
       <Fragment>
-        <div className="card" style={{"gridColumnStart": 2}}>
+        <div className="card" style={this.props.style}>
           <div className="card-text">
             <form id="select-stat-form" onChange={this.handleChange}>
               1. When playing, I prefer to...<br />

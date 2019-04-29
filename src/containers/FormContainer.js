@@ -8,6 +8,8 @@ import SocialStatForm from '../components/forms/SocialStatForm'
 import PowerForm from '../components/forms/PowerForm'
 import FilterForm from '../components/forms/FilterForm'
 import CardDeck from '../components/forms/CardDeck'
+import BlankCard from '../components/forms/BlankCard'
+import ClickHereMessage from '../components/forms/ClickHereMessage'
 import SearchListOutput from '../components/forms/SearchListOutput'
 
 
@@ -18,20 +20,66 @@ class FormContainer extends Component {
     this.state = {
       formSearchList: {
 
-      }
+      },
+      flipCard1: false,
+      flipCard2: false,
+      flipCard3: false,
+      flipCard4: false,
+      nextCard: 1
     }
+    this.flipCard = this.flipCard.bind(this)
   }
 
+  flipCard(num) {
+    console.log("click detected, executing flipCard()...")
+    console.log(num)
+    if (num <= 4) {
+      let card = "flipCard" + num
+      let nextNum = num + 1
+      this.setState({
+        [card]: true,
+        nextCard: nextNum
+      })
+    }
+
+  }
+
+
   render() {
+
+    let card1, card2, card3, card4;
+    if (this.state.flipCard1) {
+      card1 = <StatForm style={{"gridColumnStart": 36}} />
+    }
+    if (this.state.flipCard2) {
+      card2 = <PowerForm style={{"gridColumnStart": 63}} />
+    }
+    if (this.state.flipCard3) {
+      card3 = <BlankCard style={{"gridColumnStart": 90}} />
+    }
+    if (this.state.flipCard4) {
+      card4 = <BlankCard style={{"gridColumnStart": 117}} />
+    }
+
     return (
       <Fragment>
+        <div className="deck-of-cards">
+          <CardDeck style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 1}} />
+          <CardDeck style={{"gridColumnStart": 6, "top": "6px", "left": "5px", "zIndex": 2}} />
+          <CardDeck style={{"gridColumnStart": 6, "top": "12px", "left": "10px", "zIndex": 4}} />
+          <CardDeck style={{"gridColumnStart": 6, "top": "18px", "left": "15px", "zIndex": 5}} />
+            <ClickHereMessage
+              style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 6}}
+              flipCard={this.flipCard}
+              nextCard={this.state.nextCard}
+              />
+        </div>
 
-        <CardDeck style={{"gridColumnStart": 6}} />
-        <CardDeck style={{"gridColumnStart": 6}} />
-        <CardDeck style={{"gridColumnStart": 6}} />
-        <CardDeck style={{"gridColumnStart": 6}} />
-        <StatForm style={{"gridColumnStart": 36}} />
-        <PowerForm style={{"gridColumnStart": 63}} />
+        {card1}
+        {card2}
+        {card3}
+        {card4}
+        
 
         <SearchListOutput style={{"gridColumnStart": 8, "gridRowStart": 46}} />
 

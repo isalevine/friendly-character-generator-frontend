@@ -2,7 +2,8 @@ import React, {Component, Fragment} from 'react';
 import './App.css';
 
 // import OldMainPage from './components/OldMainPage'
-import GridContainer from './containers/GridContainer'
+// import GridContainer from './containers/GridContainer'
+import FormContainer from './containers/FormContainer'
 
 
 // const API_URL = "http://localhost:3000/api/v1/"
@@ -18,7 +19,7 @@ class App extends Component {
           <p><strong>This is from App.js</strong></p>
         </div>
 
-        <GridContainer />
+        <FormContainer />
       </Fragment>
     )
   }

@@ -19,8 +19,12 @@ import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 // change "physical" to "fight" as part of playstyle refactoring??
 // (because "spells" are part of the "physical" category right now...)
 
-// DO ALL THIS.STATE NESTED KEYS NEED TO BE CAMEL-CASED?? (originall done as
-// snake-case to match Rails database column-names...)
+// REFACTOR ALL THIS.STATE NESTED KEYS TO BE CAMEL-CASED??
+// (originally done as snake-case to match Rails database column-names...)
+
+// REFACTOR FormContainer TO BE MainContainer??
+// (or something else more general...maybe CardContainer??)
+// ...I think this will end up holding state for BOTH forms & characters...
 
 class FormContainer extends Component {
 
@@ -45,6 +49,8 @@ class FormContainer extends Component {
         id: null,
         name: ""
       },
+      drawFormCards: true,
+      drawCharacterCards: false,
       flipCard1: false,
       flipCard2: false,
       flipCard3: false,
@@ -59,10 +65,11 @@ class FormContainer extends Component {
     this.fetchSearchList = this.fetchSearchList.bind(this)
     this.randomSearchList = this.randomSearchList.bind(this)
     this.fetchArchetype = this.fetchArchetype.bind(this)
-    this.displayFlippedCards = this.displayFlippedCards.bind(this)
+    this.displayFlippedFormCards = this.displayFlippedFormCards.bind(this)
     this.displaySearchPreferenceOutput = this.displaySearchPreferenceOutput.bind(this)
     this.displaySearchListResults = this.displaySearchListResults.bind(this)
     this.displayFoundArchetypeOutput = this.displayFoundArchetypeOutput.bind(this)
+    this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
   }
 
 
@@ -186,6 +193,8 @@ class FormContainer extends Component {
     let forms = Array.from(document.getElementsByClassName("card-form"))
     forms.forEach(form => {
       form.classList.add("unclickable")
+      form.style.transition = "2s linear"
+      form.style.left = "6px"
     })
   }
 
@@ -251,12 +260,12 @@ class FormContainer extends Component {
   displayCardDeck() {
     return (
       <div className="deck-of-cards">
-        <CardDeck style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 1}} />
-        <CardDeck style={{"gridColumnStart": 6, "top": "6px", "left": "5px", "zIndex": 2}} />
-        <CardDeck style={{"gridColumnStart": 6, "top": "12px", "left": "10px", "zIndex": 4}} />
-        <CardDeck style={{"gridColumnStart": 6, "top": "18px", "left": "15px", "zIndex": 5}} />
+        <CardDeck style={{"top": "0px", "left": "0px", "zIndex": 1}} />
+        <CardDeck style={{"top": "6px", "left": "5px", "zIndex": 2}} />
+        <CardDeck style={{"top": "12px", "left": "10px", "zIndex": 4}} />
+        <CardDeck style={{"top": "18px", "left": "15px", "zIndex": 5}} />
           <ClickHereMessage
-            style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 6}}
+            style={{"position": "absolute", "top": "0px", "left": "0px", "zIndex": 6}}
             flipCard={this.flipCard}
             nextCard={this.state.nextCard}
           />
@@ -265,46 +274,50 @@ class FormContainer extends Component {
   }
 
 
-  displayFlippedCards() {
-    let card1, card2, card3, card4;
-    if (this.state.flipCard1) {
-      card1 = <StatForm style={{"gridColumnStart": 36}}
-        nextCard={this.state.nextCard}
-        flipCard={this.flipCard}
-        formSearchPreference={this.state.formSearchPreference}
-        changeSearchPreference={this.changeSearchPreference}
-      />
-    }
-    if (this.state.flipCard2) {
-      card2 = <PowerForm style={{"gridColumnStart": 63}}
-        nextCard={this.state.nextCard}
-        flipCard={this.flipCard}
-        formSearchPreference={this.state.formSearchPreference}
-        changeSearchPreference={this.changeSearchPreference}
-        createSearchPreference={this.createSearchPreference}
-      />
-    }
-    if (this.state.flipCard3) {
-      card3 = <BlankCard style={{"gridColumnStart": 90}} />
-    }
-    if (this.state.flipCard4) {
-      card4 = <BlankCard style={{"gridColumnStart": 117}} />
+  displayFlippedFormCards() {
+    if (this.state.drawFormCards) {
+      let card1, card2, card3, card4;
+      if (this.state.flipCard1) {
+        card1 = <StatForm style={{"top": 6, "left": 300}}
+          nextCard={this.state.nextCard}
+          flipCard={this.flipCard}
+          formSearchPreference={this.state.formSearchPreference}
+          changeSearchPreference={this.changeSearchPreference}
+        />
+      }
+      if (this.state.flipCard2) {
+        card2 = <PowerForm style={{"top": 6, "left": 570}}
+          nextCard={this.state.nextCard}
+          flipCard={this.flipCard}
+          formSearchPreference={this.state.formSearchPreference}
+          changeSearchPreference={this.changeSearchPreference}
+          createSearchPreference={this.createSearchPreference}
+        />
+      }
+      // if (this.state.flipCard3) {
+      //   card3 = <BlankCard style={{"top": 6, "left": 840}} />
+      // }
+      // if (this.state.flipCard4) {
+      //   card4 = <BlankCard style={{"top": 6, "left": 1110}} />
+      // }
+
+      return (
+        <Fragment>
+          {card1}
+          {card2}
+          {card3}
+          {card4}
+        </Fragment>
+      )
     }
 
-    return (
-      <Fragment>
-        {card1}
-        {card2}
-        {card3}
-        {card4}
-      </Fragment>
-    )
   }
 
 
   displaySearchPreferenceOutput() {
     return (
-      <SearchPreferenceOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
+      <SearchPreferenceOutput
+        style={{"position": "absolute", "left": 80, "top": 460}}
         formSearchPreference={this.state.formSearchPreference}
       />
     )
@@ -316,7 +329,7 @@ class FormContainer extends Component {
     if (this.state.matchedSearchList.match_found) {
       return (
         <SearchListResults
-          style={{"gridColumnStart": 44, "gridRowStart": 46}}
+          style={{"position": "absolute", "left": 440, "top": 460}}
           SearchList={this.state.matchedSearchList}
         />
       )
@@ -330,7 +343,7 @@ class FormContainer extends Component {
     if (this.state.foundArchetype.archetype_found) {
       return (
         <FoundArchetypeOutput
-          style={{"gridColumnStart": 80, "gridRowStart": 46}}
+          style={{"position": "absolute", "left": 800, "top": 460}}
           foundArchetype={this.state.foundArchetype}
         />
       )
@@ -338,14 +351,19 @@ class FormContainer extends Component {
   }
 
 
+  displayFlippedCharacterCards() {
+    return {}
+  }
+
+
   render() {
 
     return (
-      <Fragment>
+      <div id="form-container">
 
         {this.displayCardDeck()}
 
-        {this.displayFlippedCards()}
+        {this.displayFlippedFormCards()}
 
         {this.displaySearchPreferenceOutput()}
 
@@ -353,7 +371,7 @@ class FormContainer extends Component {
 
         {this.displayFoundArchetypeOutput()}
 
-      </Fragment>
+      </div>
     )
   }
 

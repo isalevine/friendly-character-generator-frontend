@@ -28,8 +28,7 @@ class PowerForm extends Component {
 
     return (
       <Fragment>
-        <div className="card" style={this.props.style}>
-
+        <div className="card card-form" style={this.props.style}>
           <div className="card-text">
             <form id="power-form" className="card-form" onChange={this.handleChange}>
               2. I like to have powers that...<br />

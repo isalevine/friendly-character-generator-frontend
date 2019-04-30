@@ -42,9 +42,9 @@ class StatForm extends Component {
 
     return (
       <Fragment>
-        <div className="card" style={this.props.style}>
+        <div className="card card-form" style={this.props.style}>
           <div className="card-text">
-            <form id="select-stat-form" className="card-form" onChange={this.handleChange}>
+            <form id="select-stat-form" onChange={this.handleChange}>
               1. When playing, I prefer to...<br />
               <input type="radio" name="select-stat-form" value="physical" />fight!<br />
               <input type="radio" name="select-stat-form" value="mental" />think and solve puzzles!<br />

@@ -101,6 +101,7 @@ code {
 .click-here-text {
   opacity: 1.0;
   transition: 1.5s ease-in-out;
+  pointer-events: none;
 }
 
 .fadeout-effect {
@@ -109,8 +110,8 @@ code {
 }
 
 
-#search-preference-output {
-  width: 400px;
+.form-search-outputs {
+  width: 320px;
   height: 160px;
   border-style: solid;
   border-width: 10px;

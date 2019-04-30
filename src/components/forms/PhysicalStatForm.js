@@ -1,6 +1,9 @@
 import React, {Component, Fragment} from 'react'
 
 
+// change "physical" to "fight" as part of playstyle refactoring??
+// (because "spells" are part of the "physical" category right now...)
+
 class PhysicalStatForm extends Component {
 
   handleChange = (ev) => {

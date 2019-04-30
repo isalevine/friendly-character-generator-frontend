@@ -11,7 +11,11 @@ import CardDeck from '../components/forms/CardDeck'
 import BlankCard from '../components/forms/BlankCard'
 import ClickHereMessage from '../components/forms/ClickHereMessage'
 import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
+import SearchListResults from '../components/forms/SearchListResults'
 
+
+// change "physical" to "fight" as part of playstyle refactoring??
+// (because "spells" are part of the "physical" category right now...)
 
 class FormContainer extends Component {
 
@@ -24,15 +28,24 @@ class FormContainer extends Component {
         stat_preference: "",
         power_preference: ""
       },
+      matchedSearchList: {
+        matchFound: false,
+        search_playstyle_pref: "",
+        search_action_pref: "",
+        search_power_pref: ""
+      },
       flipCard1: false,
       flipCard2: false,
       flipCard3: false,
       flipCard4: false,
-      nextCard: 1
+      nextCard: 1,
+
     }
     this.flipCard = this.flipCard.bind(this)
     this.changeSearchPreference = this.changeSearchPreference.bind(this)
     this.createSearchPreference = this.createSearchPreference.bind(this)
+    this.fetchSearchList = this.fetchSearchList.bind(this)
+    this.randomSearchList = this.randomSearchList.bind(this)
   }
 
 
@@ -130,7 +143,7 @@ class FormContainer extends Component {
 
   createSearchPreference(formSearchPreference) {
     console.log("formSearchPreference: ", formSearchPreference)
-    let url = "http://localhost:3000/api/v1/" + "/search_preferences"
+    let url = "http://localhost:3000/" + "/search_preferences"
     let config = {
       method: "POST",
       headers: {
@@ -143,8 +156,47 @@ class FormContainer extends Component {
     fetch(url, config)
     .then(res => res.json())
     .then(data => {
-      console.log("data: ", data)
+      console.log("SearchPreference created! returned data: ", data)
+      this.fetchSearchList()
     })
+  }
+
+
+
+  fetchSearchList() {
+    console.log("executing fetchSearchList()...")
+
+    let url = "http://localhost:3000/" + "/search_lists"
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log("all searchLists data: ", data)
+
+      let SearchLists = [];
+      data.forEach(search_list => {
+        if (search_list.search_playstyle_pref.includes(this.state.formSearchPreference.playstyle_preference) &&
+        search_list.search_action_pref.includes(this.state.formSearchPreference.action_preference) &&
+        (search_list.search_power_pref.includes(this.state.formSearchPreference.power_preference) ||
+         search_list.search_power_pref === "any")
+       ) {
+         // console.log("Match found! search_list: ", search_list)
+         SearchLists.push(search_list)
+        }
+      })
+
+      console.log("SearchLists: ", SearchLists) // LEFT OFF HERE!!
+
+      let randomSearchList = this.randomSearchList(SearchLists);
+      randomSearchList["foundList"] = true;
+      this.setState({matchedSearchList: randomSearchList})
+    })
+  }
+
+  randomSearchList(SearchLists) {
+    let num = Math.floor(Math.random() * SearchLists.length)
+    return SearchLists[num]
+
+    // return {}
   }
 
 
@@ -177,6 +229,16 @@ class FormContainer extends Component {
       card4 = <BlankCard style={{"gridColumnStart": 117}} />
     }
 
+
+    let searchListResults;
+    if (this.state.matchedSearchList.foundList) {
+      searchListResults = <SearchListResults
+        style={{"gridColumnStart": 44, "gridRowStart": 46}}
+        SearchList={this.state.matchedSearchList}
+      />
+    }
+
+
     return (
       <Fragment>
         <div className="deck-of-cards">
@@ -200,6 +262,9 @@ class FormContainer extends Component {
         <SearchPreferenceOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
           formSearchPreference={this.state.formSearchPreference}
         />
+
+        {searchListResults}
+
 
       </Fragment>
     )

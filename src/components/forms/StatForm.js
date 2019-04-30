@@ -5,12 +5,15 @@ import MentalStatForm from './MentalStatForm'
 import SocialStatForm from './SocialStatForm'
 
 
+// change "physical" to "fight" as part of playstyle refactoring??
+// (because "spells" are part of the "physical" category right now...)
+
 class StatForm extends Component {
 
   handleChange = (ev) => {
     this.props.changeSearchPreference("playstyle_preference", ev.target.value)
   }
-  
+
 
   render() {
 

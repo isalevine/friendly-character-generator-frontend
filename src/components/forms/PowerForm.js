@@ -18,7 +18,8 @@ class PowerForm extends Component {
     if (this.props.formSearchPreference.playstyle_preference !== "" &&
         this.props.formSearchPreference.action_preference !== "" &&
         this.props.formSearchPreference.stat_preference !== "" &&
-        this.props.formSearchPreference.power_preference !== "") {
+        this.props.formSearchPreference.power_preference !== ""
+    ) {
       button = <SubmitButton
         formSearchPreference={this.props.formSearchPreference}
         createSearchPreference={this.props.createSearchPreference}

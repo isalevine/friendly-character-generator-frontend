@@ -11,8 +11,9 @@ import React, {Component} from 'react'
 class SearchPreferenceOutput extends Component {
 
   render() {
+    console.log(this.props.formSearchPreference)
     return (
-      <div id="search-preference-output" className="form-search-outputs" style={this.props.style}>
+      <div id="search-preference-output" style={this.props.style}>
         <h4>SearchPreference Output:</h4>
           playstyle_preference: {this.props.formSearchPreference.playstyle_preference}<br />
           action_preference: {this.props.formSearchPreference.action_preference}<br />

@@ -15,7 +15,10 @@ class PowerForm extends Component {
   render() {
 
     let button;
-    if (this.props.nextCard === 4) {
+    if (this.props.formSearchPreference.playstyle_preference !== "" &&
+        this.props.formSearchPreference.action_preference !== "" &&
+        this.props.formSearchPreference.stat_preference !== "" &&
+        this.props.formSearchPreference.power_preference !== "") {
       button = <SubmitButton
         formSearchPreference={this.props.formSearchPreference}
         createSearchPreference={this.props.createSearchPreference}
@@ -32,7 +35,7 @@ class PowerForm extends Component {
               <input type="radio" name="power-form" value="damage" />deal extra damage!<br />
               <input type="radio" name="power-form" value="heal" />heal and protect others!<br />
               <input type="radio" name="power-form" value="stealth" />give me super-stealth!<br />
-              <input type="radio" name="power-form" value="knowledge" />give me limitless knowledge!<br />
+              <input type="radio" name="power-form" value="mind" />boost my mind and senses!<br />
               <input type="radio" name="power-form" value="control" />help me control others!<br />
             </form>
           </div>

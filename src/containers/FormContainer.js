@@ -58,14 +58,70 @@ class FormContainer extends Component {
     console.log("executing changeSearchPreference...")
     console.log("preference: ", preference)
     console.log("value", value)
-    let obj = {...this.state.formSearchPreference}
-    obj[preference] = value
-    this.setState({formSearchPreference: obj})
+    let newSearchPreference = {...this.state.formSearchPreference}
+    newSearchPreference[preference] = value
 
-    if (this.state.formSearchPreference.playstyle_preference !== "" &&
-      this.state.formSearchPreference.action_preference !== "") {
-        this.calculateStatPreference()
+    if (preference === "playstyle_preference") {
+      newSearchPreference["action_preference"] = ""
+      newSearchPreference["stat_preference"] = ""
+    }
+    else if (preference === "action_preference") {
+      newSearchPreference["stat_preference"] = this.calculateStatPreference(newSearchPreference)
+    }
+
+    this.setState({formSearchPreference: newSearchPreference})
+  }
+
+  calculateStatPreference = (newSearchPreference) => {
+    let {playstyle_preference: playstyle, action_preference: action} = newSearchPreference
+    let stat;
+
+    if (playstyle === "physical") {
+      if (action === "weapon") {
+        stat = "strength"
       }
+      else if (action === "tank") {
+        stat = "stamina"
+      }
+      else if (action === "sneak") {
+        stat = "dexterity"
+      }
+      else if (action === "spells") {
+        stat = "wisdom"
+      }
+    }
+
+    else if (playstyle === "mental") {
+      if (action === "spells") {
+        stat = "wisdom"
+      }
+      else if (action === "investigate") {
+        stat = "wisdom"
+      }
+      else if (action === "knowledge") {
+        stat = "intelligence"
+      }
+    }
+
+    else if (playstyle === "social") {
+      if (action === "leader") {
+        stat = "charisma"
+      }
+      else if (action === "perform") {
+        stat = "charisma"
+      }
+      else if (action === "manipulate") {
+        stat = "charisma"
+      }
+      else if (action === "seduce") {
+        stat = "charisma"
+      }
+    }
+    else {
+      stat = ""
+    }
+
+    return stat
   }
 
 

@@ -8,7 +8,6 @@ class PhysicalStatForm extends Component {
     if (this.props.nextCard === 2) {
       this.props.flipCard(this.props.nextCard)
     }
-    this.props.calculateStatPreference()
   }
 
   render() {

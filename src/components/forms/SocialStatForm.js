@@ -8,6 +8,7 @@ class SocialStatForm extends Component {
     if (this.props.nextCard === 2) {
       this.props.flipCard(this.props.nextCard)
     }
+    this.props.calculateStatPreference()
   }
 
   render() {
@@ -15,10 +16,10 @@ class SocialStatForm extends Component {
       <Fragment>
         <form id="social-stat-form" onChange={this.handleChange}>
           c. When talking as my character, I like to...<br />
-        <input type="radio" name="social-stat-form" value="charisma" />be an inspiring leader!<br />
-          <input type="radio" name="social-stat-form" value="charisma" />be a performer! / be in disguise!<br />
-          <input type="radio" name="social-stat-form" value="charisma" />lie and manipulate others!<br />
-          <input type="radio" name="social-stat-form" value="charisma" />seduce others!<br />
+        <input type="radio" name="social-stat-form" value="leader" />be an inspiring leader!<br />
+          <input type="radio" name="social-stat-form" value="perform" />be a performer! / be in disguise!<br />
+          <input type="radio" name="social-stat-form" value="manipulate" />lie and manipulate others!<br />
+          <input type="radio" name="social-stat-form" value="seduce" />seduce others!<br />
         </form>
       </Fragment>
     )

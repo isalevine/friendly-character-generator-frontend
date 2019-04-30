@@ -6,8 +6,9 @@ class SubmitButton extends Component {
   handleClick = (ev) => {
     ev.target.disabled = true;
     let formSearchPreference = {
-      stat_preference: this.props.formSearchPreference.stat_preference,
+      playstyle_preference: this.props.formSearchPreference.playstyle_preference,
       action_preference: this.props.formSearchPreference.action_preference,
+      stat_preference: this.props.formSearchPreference.stat_preference,
       power_preference: this.props.formSearchPreference.power_preference
     }
     this.props.createSearchPreference(formSearchPreference)

@@ -19,8 +19,9 @@ class FormContainer extends Component {
     super()
     this.state = {
       formSearchPreference: {
-        stat_preference: "",
+        playstyle_preference: "",
         action_preference: "",
+        stat_preference: "",
         power_preference: ""
       },
       flipCard1: false,
@@ -33,6 +34,9 @@ class FormContainer extends Component {
     this.changeSearchPreference = this.changeSearchPreference.bind(this)
     this.createSearchPreference = this.createSearchPreference.bind(this)
   }
+
+
+
 
   flipCard(num) {
     console.log("click detected, executing flipCard()...")
@@ -47,11 +51,26 @@ class FormContainer extends Component {
     }
   }
 
+
+
+
   changeSearchPreference(preference, value) {
+    console.log("executing changeSearchPreference...")
+    console.log("preference: ", preference)
+    console.log("value", value)
     let obj = {...this.state.formSearchPreference}
     obj[preference] = value
     this.setState({formSearchPreference: obj})
+
+    if (this.state.formSearchPreference.playstyle_preference !== "" &&
+      this.state.formSearchPreference.action_preference !== "") {
+        this.calculateStatPreference()
+      }
   }
+
+
+
+
 
   createSearchPreference(formSearchPreference) {
     console.log("formSearchPreference: ", formSearchPreference)
@@ -71,6 +90,8 @@ class FormContainer extends Component {
       console.log("data: ", data)
     })
   }
+
+
 
 
   render() {

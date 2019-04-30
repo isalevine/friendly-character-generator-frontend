@@ -72,6 +72,8 @@ code {
   background-color: aquamarine;
 }
 
+.card-form {}
+
 .card-picture {}
 
 .card-background {}
@@ -107,6 +109,10 @@ code {
 .fadeout-effect {
   opacity: 0.0;
   transition: 1s ease-in-out;
+}
+
+.unclickable {
+  pointer-events: none;
 }
 
 

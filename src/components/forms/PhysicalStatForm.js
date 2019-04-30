@@ -16,7 +16,7 @@ class PhysicalStatForm extends Component {
   render() {
     return (
       <Fragment>
-        <form id="physical-stat-form" onChange={this.handleChange}>
+        <form id="physical-stat-form" className="card-form" onChange={this.handleChange}>
           a. When fighting, I like to...<br />
         <input type="radio" name="physical-stat-form" value="weapon" />deal lots of damage with my weapon!<br />
           <input type="radio" name="physical-stat-form" value="tank" />take lots of damage and never die!<br />

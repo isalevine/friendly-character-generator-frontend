@@ -54,6 +54,7 @@ class FormContainer extends Component {
     this.flipCard = this.flipCard.bind(this)
     this.changeSearchPreference = this.changeSearchPreference.bind(this)
     this.createSearchPreference = this.createSearchPreference.bind(this)
+    this.disableForms = this.disableForms.bind(this)
     this.fetchSearchList = this.fetchSearchList.bind(this)
     this.randomSearchList = this.randomSearchList.bind(this)
     this.fetchArchetype = this.fetchArchetype.bind(this)
@@ -157,7 +158,7 @@ class FormContainer extends Component {
 
 
   createSearchPreference(formSearchPreference) {
-    console.log("formSearchPreference: ", formSearchPreference)
+    // console.log("formSearchPreference: ", formSearchPreference)
     let url = "http://localhost:3000/" + "/search_preferences"
     let config = {
       method: "POST",
@@ -172,10 +173,20 @@ class FormContainer extends Component {
     .then(res => res.json())
     .then(data => {
       console.log("SearchPreference created! returned data: ", data)
+
+      this.disableForms()
+
       this.fetchSearchList()
     })
   }
 
+
+  disableForms() {
+    let forms = Array.from(document.getElementsByClassName("card-form"))
+    forms.forEach(form => {
+      form.classList.add("unclickable")
+    })
+  }
 
 
   async fetchSearchList() {
@@ -208,10 +219,12 @@ class FormContainer extends Component {
     await this.fetchArchetype()
   }
 
+
   randomSearchList(SearchLists) {
     let num = Math.floor(Math.random() * SearchLists.length)
     return SearchLists[num]
   }
+
 
   fetchArchetype() {
     console.log("executing fetchArchetype...")

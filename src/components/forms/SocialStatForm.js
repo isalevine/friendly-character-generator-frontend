@@ -13,7 +13,7 @@ class SocialStatForm extends Component {
   render() {
     return (
       <Fragment>
-        <form id="social-stat-form" onChange={this.handleChange}>
+        <form id="social-stat-form" className="card-form" onChange={this.handleChange}>
           c. When talking as my character, I like to...<br />
         <input type="radio" name="social-stat-form" value="leader" />be an inspiring leader!<br />
           <input type="radio" name="social-stat-form" value="perform" />be a performer! / be in disguise!<br />

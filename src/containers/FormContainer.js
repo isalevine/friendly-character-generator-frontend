@@ -18,6 +18,9 @@ import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 // change "physical" to "fight" as part of playstyle refactoring??
 // (because "spells" are part of the "physical" category right now...)
 
+// DO ALL THIS.STATE NESTED KEYS NEED TO BE CAMEL-CASED?? (originall done as
+// snake-case to match Rails database column-names...)
+
 class FormContainer extends Component {
 
   constructor() {
@@ -30,10 +33,16 @@ class FormContainer extends Component {
         power_preference: ""
       },
       matchedSearchList: {
-        matchFound: false,
+        match_found: false,
+        archetype_id: null,
         search_playstyle_pref: "",
         search_action_pref: "",
         search_power_pref: ""
+      },
+      foundArchetype: {
+        archetype_found: false,
+        id: null,
+        name: ""
       },
       flipCard1: false,
       flipCard2: false,
@@ -58,8 +67,8 @@ class FormContainer extends Component {
 
 
   flipCard(num) {
-    console.log("click detected, executing flipCard()...")
-    console.log(num)
+    // console.log("click detected, executing flipCard()...")
+    // console.log(num)
     if (num <= 4) {
       let card = "flipCard" + num
       let nextNum = num + 1
@@ -74,9 +83,9 @@ class FormContainer extends Component {
 
 
   changeSearchPreference(preference, value) {
-    console.log("executing changeSearchPreference...")
-    console.log("preference: ", preference)
-    console.log("value", value)
+    // console.log("executing changeSearchPreference...")
+    // console.log("preference: ", preference)
+    // console.log("value", value)
     let newSearchPreference = {...this.state.formSearchPreference}
     newSearchPreference[preference] = value
 
@@ -169,11 +178,11 @@ class FormContainer extends Component {
 
 
 
-  fetchSearchList() {
+  async fetchSearchList() {
     console.log("executing fetchSearchList()...")
 
-    let url = "http://localhost:3000/" + "/search_lists"
-    fetch(url)
+    let url = "http://localhost:3000" + "/search_lists"
+    await fetch(url)
     .then(res => res.json())
     .then(data => {
       console.log("all searchLists data: ", data)
@@ -193,9 +202,10 @@ class FormContainer extends Component {
       console.log("SearchLists: ", SearchLists) // LEFT OFF HERE!!
 
       let randomSearchList = this.randomSearchList(SearchLists);
-      randomSearchList["foundList"] = true;
+      randomSearchList["match_found"] = true;
       this.setState({matchedSearchList: randomSearchList})
     })
+    await this.fetchArchetype()
   }
 
   randomSearchList(SearchLists) {
@@ -205,6 +215,19 @@ class FormContainer extends Component {
 
   fetchArchetype() {
     console.log("executing fetchArchetype...")
+
+    let url = "http://localhost:3000" + "/archetypes"
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log("fetchArchetype data: ", data)
+
+      let foundArchetype = data.find(archetype => {
+        return archetype.id === this.state.matchedSearchList.archetype_id
+      })
+      foundArchetype["archetype_found"] = true;
+      this.setState({foundArchetype: foundArchetype})
+    })
   }
 
 
@@ -276,7 +299,7 @@ class FormContainer extends Component {
 
   displaySearchListResults() {
     let searchListResults;
-    if (this.state.matchedSearchList.foundList) {
+    if (this.state.matchedSearchList.match_found) {
       return (
         <SearchListResults
           style={{"gridColumnStart": 44, "gridRowStart": 46}}
@@ -288,11 +311,16 @@ class FormContainer extends Component {
 
 
   displayFoundArchetypeOutput() {
-    return (
-      <FoundArchetypeOutput
-        style={{"gridColumnStart": 74, "gridRowStart": 46}}
-      />
-    )
+    console.log("inside displayFoundArchetypeOutput()...")
+    console.log("current this.state.foundArchetype: ", this.state.foundArchetype)
+    if (this.state.foundArchetype.archetype_found) {
+      return (
+        <FoundArchetypeOutput
+          style={{"gridColumnStart": 80, "gridRowStart": 46}}
+          foundArchetype={this.state.foundArchetype}
+        />
+      )
+    }
   }
 
 
@@ -308,6 +336,8 @@ class FormContainer extends Component {
         {this.displaySearchPreferenceOutput()}
 
         {this.displaySearchListResults()}
+
+        {this.displayFoundArchetypeOutput()}
 
       </Fragment>
     )

@@ -12,6 +12,7 @@ import BlankCard from '../components/forms/BlankCard'
 import ClickHereMessage from '../components/forms/ClickHereMessage'
 import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 import SearchListResults from '../components/forms/SearchListResults'
+import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -46,6 +47,11 @@ class FormContainer extends Component {
     this.createSearchPreference = this.createSearchPreference.bind(this)
     this.fetchSearchList = this.fetchSearchList.bind(this)
     this.randomSearchList = this.randomSearchList.bind(this)
+    this.fetchArchetype = this.fetchArchetype.bind(this)
+    this.displayFlippedCards = this.displayFlippedCards.bind(this)
+    this.displaySearchPreferenceOutput = this.displaySearchPreferenceOutput.bind(this)
+    this.displaySearchListResults = this.displaySearchListResults.bind(this)
+    this.displayFoundArchetypeOutput = this.displayFoundArchetypeOutput.bind(this)
   }
 
 
@@ -195,15 +201,34 @@ class FormContainer extends Component {
   randomSearchList(SearchLists) {
     let num = Math.floor(Math.random() * SearchLists.length)
     return SearchLists[num]
+  }
 
-    // return {}
+  fetchArchetype() {
+    console.log("executing fetchArchetype...")
   }
 
 
 
 
-  render() {
 
+  displayCardDeck() {
+    return (
+      <div className="deck-of-cards">
+        <CardDeck style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 1}} />
+        <CardDeck style={{"gridColumnStart": 6, "top": "6px", "left": "5px", "zIndex": 2}} />
+        <CardDeck style={{"gridColumnStart": 6, "top": "12px", "left": "10px", "zIndex": 4}} />
+        <CardDeck style={{"gridColumnStart": 6, "top": "18px", "left": "15px", "zIndex": 5}} />
+          <ClickHereMessage
+            style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 6}}
+            flipCard={this.flipCard}
+            nextCard={this.state.nextCard}
+          />
+      </div>
+    )
+  }
+
+
+  displayFlippedCards() {
     let card1, card2, card3, card4;
     if (this.state.flipCard1) {
       card1 = <StatForm style={{"gridColumnStart": 36}}
@@ -229,42 +254,60 @@ class FormContainer extends Component {
       card4 = <BlankCard style={{"gridColumnStart": 117}} />
     }
 
-
-    let searchListResults;
-    if (this.state.matchedSearchList.foundList) {
-      searchListResults = <SearchListResults
-        style={{"gridColumnStart": 44, "gridRowStart": 46}}
-        SearchList={this.state.matchedSearchList}
-      />
-    }
-
-
     return (
       <Fragment>
-        <div className="deck-of-cards">
-          <CardDeck style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 1}} />
-          <CardDeck style={{"gridColumnStart": 6, "top": "6px", "left": "5px", "zIndex": 2}} />
-          <CardDeck style={{"gridColumnStart": 6, "top": "12px", "left": "10px", "zIndex": 4}} />
-          <CardDeck style={{"gridColumnStart": 6, "top": "18px", "left": "15px", "zIndex": 5}} />
-            <ClickHereMessage
-              style={{"gridColumnStart": 6, "top": "0px", "left": "0px", "zIndex": 6}}
-              flipCard={this.flipCard}
-              nextCard={this.state.nextCard}
-            />
-        </div>
-
         {card1}
         {card2}
         {card3}
         {card4}
+      </Fragment>
+    )
+  }
 
 
-        <SearchPreferenceOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
-          formSearchPreference={this.state.formSearchPreference}
+  displaySearchPreferenceOutput() {
+    return (
+      <SearchPreferenceOutput style={{"gridColumnStart": 8, "gridRowStart": 46}}
+        formSearchPreference={this.state.formSearchPreference}
+      />
+    )
+  }
+
+
+  displaySearchListResults() {
+    let searchListResults;
+    if (this.state.matchedSearchList.foundList) {
+      return (
+        <SearchListResults
+          style={{"gridColumnStart": 44, "gridRowStart": 46}}
+          SearchList={this.state.matchedSearchList}
         />
+      )
+    }
+  }
 
-        {searchListResults}
 
+  displayFoundArchetypeOutput() {
+    return (
+      <FoundArchetypeOutput
+        style={{"gridColumnStart": 74, "gridRowStart": 46}}
+      />
+    )
+  }
+
+
+  render() {
+
+    return (
+      <Fragment>
+
+        {this.displayCardDeck()}
+
+        {this.displayFlippedCards()}
+
+        {this.displaySearchPreferenceOutput()}
+
+        {this.displaySearchListResults()}
 
       </Fragment>
     )

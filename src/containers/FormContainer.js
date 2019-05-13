@@ -196,6 +196,8 @@ class FormContainer extends Component {
       form.style.transition = "2s linear"
       form.style.left = "6px"
     })
+    let div = document.getElementById('deck-click-here-box')
+    div.classList.add('fadeout-effect')
   }
 
 

@@ -167,7 +167,7 @@ class FormContainer extends Component {
 
   createSearchPreference(formSearchPreference) {
     // console.log("formSearchPreference: ", formSearchPreference)
-    let url = "http://localhost:3000/" + "/search_preferences"
+    let url = "http://localhost:3000" + "/search_preferences"
     let config = {
       method: "POST",
       headers: {

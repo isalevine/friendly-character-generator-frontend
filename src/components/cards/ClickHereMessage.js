@@ -21,7 +21,7 @@ class ClickHereMessage extends Component {
       setTimeout(() => {
         div.remove()
       }, 1000)
-    }
+    } 
 
     if (this.props.nextCard < 5) {
       this.props.flipCard(this.props.nextCard)

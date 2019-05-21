@@ -14,7 +14,7 @@ class StatForm extends Component {
     this.props.changeSearchPreference("playstyle_preference", ev.target.value)
   }
 
-
+  // move logic below OUT of render...
   render() {
 
     let selectedStatForm = <Fragment />;

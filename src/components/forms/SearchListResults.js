@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 class SearchListResults extends Component {
 
   render() {
-    console.log(this.props.SearchList)
+    // console.log(this.props.SearchList)
     return (
       <div id="search-list-results" className="form-search-outputs" style={this.props.style}>
         <h4>SearchList Results:</h4>

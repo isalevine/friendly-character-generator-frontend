@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
+import {API_URL, CONVERTER_URL, HEADERS} from '../constants/index'
+
 import CardDeck from '../components/cards/CardDeck'
 import BlankCard from '../components/cards/BlankCard'
 import ClickHereMessage from '../components/cards/ClickHereMessage'
@@ -14,6 +16,7 @@ import FilterForm from '../components/forms/FilterForm'
 import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
+import ConvertedCharacter from '../components/characters/ConvertedCharacter'
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -31,24 +34,6 @@ class FormContainer extends Component {
   constructor() {
     super()
     this.state = {
-      formSearchPreference: {
-        playstyle_preference: "",
-        action_preference: "",
-        stat_preference: "",
-        power_preference: ""
-      },
-      matchedSearchList: {
-        match_found: false,
-        archetype_id: null,
-        search_playstyle_pref: "",
-        search_action_pref: "",
-        search_power_pref: ""
-      },
-      foundArchetype: {
-        archetype_found: false,
-        id: null,
-        name: ""
-      },
       drawFormCards: true,
       drawCharacterCards: false,
       flipCard1: false,
@@ -57,8 +42,27 @@ class FormContainer extends Component {
       flipCard4: false,
       nextCard: 1,
 
+      formSearchPreference: {
+        playstyle_preference: "",
+        action_preference: "",
+        stat_preference: "",
+        power_preference: "",
+      },
+      matchedSearchList: {
+        match_found: false,
+        archetype_id: null,
+        search_playstyle_pref: "",
+        search_action_pref: "",
+        search_power_pref: "",
+      },
+
+      foundArchetype: null,
+      loadedGameSystems: [],
+      convertedCharacters: [],
+
     }
     this.flipCard = this.flipCard.bind(this)
+    this.fetchGameSystem = this.fetchGameSystem.bind(this)
     this.changeSearchPreference = this.changeSearchPreference.bind(this)
     this.createSearchPreference = this.createSearchPreference.bind(this)
     this.disableForms = this.disableForms.bind(this)
@@ -72,6 +76,40 @@ class FormContainer extends Component {
     this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
   }
 
+  // fetch GameSystem on first load
+  componentDidMount() {
+    if (this.state.loadedGameSystems.length === 0) {
+      this.fetchGameSystem()
+    }
+  }
+
+  // fetch Converter to create finalized characters, IF state has game_system + output_character + archetype
+  componentDidUpdate() {
+    // refactor: break fetch into its own separate function?
+    if (this.state.loadedGameSystems.length > 0 && this.state.foundArchetype) {
+      console.log("ready to post to converter!!")
+      console.log("loadedGameSystems[0]: ", this.state.loadedGameSystems[0])
+      // HARDCODED: only sending this.state.loadedGameSystems[0], which is DnD--will need an iterator, plus a way to handle multiple simultaneous fetches...
+      let url = CONVERTER_URL + "/archetype_system_converter"
+      let config = {
+        method: "POST",
+        headers: HEADERS,
+        body: JSON.stringify({
+          archetype: this.state.foundArchetype,
+          game_system: this.state.loadedGameSystems[0]
+        })
+      };
+      fetch(url, config)
+      .then(res => res.json())
+      .then(convertedCharacter => {
+        console.log("convertedCharacter: ", convertedCharacter)
+        this.setState({
+          foundArchetype: null,
+          convertedCharacters: [...this.state.convertedCharacters, convertedCharacter]
+        })
+      }) 
+    }
+  }
 
 
 
@@ -86,6 +124,43 @@ class FormContainer extends Component {
         nextCard: nextNum
       })
     }
+  }
+
+  // HARD-CODED (refactor needed): fetches all game systems, will eventually need to load only those specified by App (dropdown menu in navbar??)
+  // ALSO: refactor different fetches/etc. into more modular functions!!
+  fetchGameSystem() {
+    console.log("executing fetchGameSystem...")
+    let url = API_URL + "/game_systems"
+    fetch(url)
+    .then(res => res.json())
+    .then(game_systems => {
+      console.log("data from fetchGameSystem(): ", game_systems)
+      let newGameSystems = []
+
+      // format objects as: { game_system: {}, output_character: {} }
+      for (let i = 0; i < game_systems.length; i++) {
+        let game_system = game_systems[i]
+        let url = CONVERTER_URL + "/generate_output_character"
+        let config = {
+          method: "POST",
+          headers: HEADERS,
+          body: JSON.stringify({game_system: game_system})
+        }
+        console.log("config: ", config)
+        fetch(url, config)
+        .then(res => res.json())
+        .then(output_character => {
+          console.log("returned output_character: ", output_character)
+          let newGameSystem = {
+            game_system: game_system,
+            output_character: output_character
+          };
+          newGameSystems.push(newGameSystem)
+        })
+      }
+
+      this.setState({loadedGameSystems: newGameSystems})
+    })
   }
 
 
@@ -167,13 +242,10 @@ class FormContainer extends Component {
 
   createSearchPreference(formSearchPreference) {
     // console.log("formSearchPreference: ", formSearchPreference)
-    let url = "http://localhost:3000" + "/search_preferences"
+    let url = API_URL + "/search_preferences"
     let config = {
       method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: HEADERS,
       body: JSON.stringify(formSearchPreference)
     }
 
@@ -204,12 +276,13 @@ class FormContainer extends Component {
   async fetchSearchList() {
     console.log("executing fetchSearchList()...")
 
-    let url = "http://localhost:3000" + "/search_lists"
+    let url = API_URL + "/search_lists"
     await fetch(url)
     .then(res => res.json())
     .then(data => {
       console.log("all searchLists data: ", data)
 
+      // REFACTOR! this logic belongs on the backend (eventually...)
       let SearchLists = [];
       data.forEach(search_list => {
         if (search_list.search_playstyle_pref.includes(this.state.formSearchPreference.playstyle_preference) &&
@@ -241,16 +314,17 @@ class FormContainer extends Component {
   fetchArchetype() {
     console.log("executing fetchArchetype...")
 
-    let url = "http://localhost:3000" + "/archetypes"
+    let url = API_URL + "/archetypes"
     fetch(url)
     .then(res => res.json())
-    .then(data => {
-      console.log("fetchArchetype data: ", data)
+    .then(archetypes => {
+      // REFACTOR: currently fetches ALL archetypes...any way to narrow down early?
+      console.log("fetchArchetype data: ", archetypes)
 
-      let foundArchetype = data.find(archetype => {
+      let foundArchetype = archetypes.find(archetype => {
         return archetype.id === this.state.matchedSearchList.archetype_id
       })
-      foundArchetype["archetype_found"] = true;
+      // foundArchetype["archetype_found"] = true;
       this.setState({foundArchetype: foundArchetype})
     })
   }
@@ -270,6 +344,7 @@ class FormContainer extends Component {
             style={{"position": "absolute", "top": "0px", "left": "0px", "zIndex": 6}}
             flipCard={this.flipCard}
             nextCard={this.state.nextCard}
+            fetchGameSystem={this.fetchGameSystem}
           />
       </div>
     )
@@ -342,7 +417,7 @@ class FormContainer extends Component {
   displayFoundArchetypeOutput() {
     console.log("inside displayFoundArchetypeOutput()...")
     console.log("current this.state.foundArchetype: ", this.state.foundArchetype)
-    if (this.state.foundArchetype.archetype_found) {
+    if (this.state.foundArchetype) {
       return (
         <FoundArchetypeOutput
           style={{"position": "absolute", "left": 800, "top": 460}}
@@ -354,7 +429,19 @@ class FormContainer extends Component {
 
 
   displayFlippedCharacterCards() {
-    return {}
+    let card1;
+    // HARDCODED to only render 1 card, with only convertedCharacters[0]
+    if (this.state.convertedCharacters.length > 0) {
+      card1 = <ConvertedCharacter style={{"top": 6, "left": 300}}
+        convertedCharacter={this.state.convertedCharacters[0]}
+      />
+    }
+
+    return (
+      <Fragment>
+        {card1}
+      </Fragment>
+    )
   }
 
 
@@ -366,6 +453,8 @@ class FormContainer extends Component {
         {this.displayCardDeck()}
 
         {this.displayFlippedFormCards()}
+
+        {this.displayFlippedCharacterCards()}
 
         {this.displaySearchPreferenceOutput()}
 

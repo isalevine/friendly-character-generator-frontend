@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 class FoundArchetypeOutput extends Component {
 
   render() {
-    console.log(this.props.foundArchetype)
+    // console.log(this.props.foundArchetype)
     return (
       <div id="found-archetype-output" className="form-search-outputs" style={this.props.style}>
         <h4>Found Archetype Output:</h4>

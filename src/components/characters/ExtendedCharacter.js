@@ -1,9 +1,7 @@
 import React, { Component, Fragment} from 'react'
 
-import ShowExtendedCharacterButton from './ShowExtendedCharacterButton'
 
-
-class ConvertedCharacter extends Component {
+class ExtendedCharacter extends Component {
 
     parseConvertedCharacter = () => {
         let character = this.props.convertedCharacter
@@ -79,11 +77,11 @@ class ConvertedCharacter extends Component {
     render() {
         return (
             <Fragment>
-              <div className="card card-character" style={this.props.style}>
-                <div className="card-character-text">
-                    {this.parseConvertedCharacter()}
+              <div className="long-card card-character" style={this.props.style}>
+                <div className="long-card-character-text">
+                  {this.parseConvertedCharacter()}
+      
                 </div>
-                <ShowExtendedCharacterButton changeShowExtendedCharacter={this.props.changeShowExtendedCharacter}/>
               </div>
             </Fragment>
           )
@@ -91,4 +89,4 @@ class ConvertedCharacter extends Component {
 }
 
 
-export default ConvertedCharacter
+export default ExtendedCharacter

@@ -17,6 +17,7 @@ import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 import ConvertedCharacter from '../components/characters/ConvertedCharacter'
+import ExtendedCharacter from '../components/characters/ExtendedCharacter'
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -60,6 +61,7 @@ class FormContainer extends Component {
       loadedGameSystems: [],
       convertedCharacters: [],
       backstoriesGenerated: false,
+      showExtendedCharacter: false,
 
     }
     this.flipCard = this.flipCard.bind(this)
@@ -75,6 +77,8 @@ class FormContainer extends Component {
     this.displaySearchListResults = this.displaySearchListResults.bind(this)
     this.displayFoundArchetypeOutput = this.displayFoundArchetypeOutput.bind(this)
     this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
+    this.displayExtendedCharacterCards = this.displayExtendedCharacterCards.bind(this)
+    this.changeShowExtendedCharacter = this.changeShowExtendedCharacter.bind(this)
   }
 
   // fetch GameSystem on first load
@@ -436,6 +440,7 @@ class FormContainer extends Component {
     if (this.state.convertedCharacters.length > 0) {
       card1 = <ConvertedCharacter style={{"top": 6, "left": 300}}
         convertedCharacter={this.state.convertedCharacters[0]}
+        changeShowExtendedCharacter={this.changeShowExtendedCharacter}
       />
     }
 
@@ -445,6 +450,30 @@ class FormContainer extends Component {
       </Fragment>
     )
   }
+
+
+  displayExtendedCharacterCards() {
+    let card2;
+    // HARDCODED to only render 1 card, with only convertedCharacters[0], at card2 location (left: 570)
+    if (this.state.convertedCharacters.length > 0 && this.state.showExtendedCharacter) {
+      card2 = <ExtendedCharacter style={{"top": 6, "left": 570}}
+        convertedCharacter={this.state.convertedCharacters[0]}
+      />
+    }
+
+    return (
+      <Fragment>
+        {card2}
+      </Fragment>
+    )
+  }
+
+
+  changeShowExtendedCharacter() {
+    this.setState({showExtendedCharacter: true})
+  }
+
+  
 
 
   render() {
@@ -458,11 +487,13 @@ class FormContainer extends Component {
 
         {this.displayFlippedCharacterCards()}
 
+        {this.displayExtendedCharacterCards()}
+
         {this.displaySearchPreferenceOutput()}
 
         {this.displaySearchListResults()}
 
-        {this.displayFoundArchetypeOutput()}
+
 
       </div>
     )
@@ -470,5 +501,6 @@ class FormContainer extends Component {
 
 }
 
+// {this.displayFoundArchetypeOutput()}
 
 export default FormContainer

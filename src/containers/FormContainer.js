@@ -407,12 +407,13 @@ class FormContainer extends Component {
   }
 
 
+  // originally: style={{"position": "absolute", "left": 440, "top": 460}}
   displaySearchListResults() {
     let searchListResults;
     if (this.state.matchedSearchList.match_found) {
       return (
         <SearchListResults
-          style={{"position": "absolute", "left": 440, "top": 460}}
+          style={{"position": "absolute", "left": 80, "top": 660}}
           SearchList={this.state.matchedSearchList}
         />
       )

@@ -9,9 +9,9 @@ class ConvertedCharacter extends Component {
         let character = this.props.convertedCharacter
 
         let header = <Fragment>
-            {character.archetype_name ? `Archetype: ${character.archetype_name}` : null} <br/>
-            {character.race ? `${character.race.alias}: ${character.race.race}` : null} <br/> 
-            {character.class ? `${character.class.alias}: ${character.class.class}` : null} <br/><br/>
+            <strong>Archetype: </strong> {character.archetype_name ? `${character.archetype_name}` : null} <br/>
+            <strong>{character.race.alias}: </strong> {character.race ? `${character.race.race}` : null} <br/> 
+            <strong>{character.class.alias}: </strong> {character.class ? `${character.class.class}` : null} <br/><br/>
         </Fragment>
 
         let stats = <Fragment>{character.stats ? this.renderStatList(character) : null}</Fragment>
@@ -43,7 +43,7 @@ class ConvertedCharacter extends Component {
         let list = stat_array.map(stat => {
             return <li key={Math.random()} >{`${stat}: ${character.stats.list[stat]}`}</li>
         })
-        return <Fragment>{alias}<ul className="character-list">{list}</ul></Fragment>
+        return <Fragment><strong>{alias}</strong><ul className="character-list">{list}</ul></Fragment>
     }
 
     renderSkillList = (character) => {
@@ -52,7 +52,7 @@ class ConvertedCharacter extends Component {
         let list = skill_array.map(skill => {
             return <li key={Math.random()} >{`${skill.name}: ${skill.points}`}</li>
         })
-        return <Fragment>{alias}<ul className="character-list">{list}</ul></Fragment>
+        return <Fragment><strong>{alias}</strong><ul className="character-list">{list}</ul></Fragment>
     }
 
     renderPowerList = (character) => {
@@ -61,7 +61,7 @@ class ConvertedCharacter extends Component {
         let list = power_array.map(power => {
             return <li key={Math.random()} >{`${power.name}: (Roll/Rules: ${power.roll}) ${power.description}`}</li>
         })
-        return <Fragment>{alias}<ul className="character-list">{list}</ul></Fragment>
+        return <Fragment><strong>{alias}</strong><ul className="character-list">{list}</ul></Fragment>
     }
 
     renderUniqueList = (character) => {}
@@ -71,7 +71,7 @@ class ConvertedCharacter extends Component {
         for (let key in character.backstory) {
             backstory_string += ` ${character.backstory[key]}`
         }
-        return <Fragment>Backstory:<br/> {backstory_string}</Fragment>
+        return <Fragment><strong>Backstory:</strong><br/> {backstory_string}</Fragment>
     }
 
 

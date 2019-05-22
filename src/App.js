@@ -15,8 +15,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="header navbar">Hi
-          <p><strong>This is from App.js</strong></p>
+        <div className="header navbar">
+          <p><strong>Welcome to Friendly Character Generator! Need a new DnD 5th Edition character? We got you covered!</strong></p>
+          <strong>To begin creating a new Dungeons and Dragons character, click the deck below.</strong>
         </div>
 
         <FormContainer />

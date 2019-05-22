@@ -31,7 +31,7 @@ class PowerForm extends Component {
         <div className="card card-form" style={this.props.style}>
           <div className="card-text">
             <form id="power-form" className="card-form" onChange={this.handleChange}>
-              2. I like to have powers that...<br />
+              <strong>2. I like to have powers that...</strong><br />
               <input type="radio" name="power-form" value="damage" />deal extra damage!<br />
               <input type="radio" name="power-form" value="heal" />heal and protect others!<br />
               <input type="radio" name="power-form" value="stealth" />give me super-stealth!<br />

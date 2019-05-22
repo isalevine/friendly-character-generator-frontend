@@ -59,6 +59,7 @@ class FormContainer extends Component {
       foundArchetype: null,
       loadedGameSystems: [],
       convertedCharacters: [],
+      backstoriesGenerated: false,
 
     }
     this.flipCard = this.flipCard.bind(this)
@@ -84,7 +85,7 @@ class FormContainer extends Component {
   }
 
   // fetch Converter to create finalized characters, IF state has game_system + output_character + archetype
-  componentDidUpdate() {
+   componentDidUpdate() {
     // refactor: break fetch into its own separate function?
     if (this.state.loadedGameSystems.length > 0 && this.state.foundArchetype) {
       console.log("ready to post to converter!!")
@@ -103,7 +104,8 @@ class FormContainer extends Component {
       .then(res => res.json())
       .then(convertedCharacter => {
         console.log("convertedCharacter: ", convertedCharacter)
-        this.setState({
+        // let finishedCharacter = this.fetchBackstory(convertedCharacter)
+          this.setState({
           foundArchetype: null,
           convertedCharacters: [...this.state.convertedCharacters, convertedCharacter]
         })

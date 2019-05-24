@@ -18,6 +18,7 @@ import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 import ConvertedCharacter from '../components/characters/ConvertedCharacter'
 import ExtendedCharacter from '../components/characters/ExtendedCharacter'
+import UserLoginCard from '../components/menu/UserLoginCard'
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -79,6 +80,7 @@ class FormContainer extends Component {
     this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
     this.displayExtendedCharacterCards = this.displayExtendedCharacterCards.bind(this)
     this.changeShowExtendedCharacter = this.changeShowExtendedCharacter.bind(this)
+    this.displayUserLoginCard = this.displayUserLoginCard.bind(this)
   }
 
   // fetch GameSystem on first load
@@ -474,6 +476,16 @@ class FormContainer extends Component {
     this.setState({showExtendedCharacter: true})
   }
 
+
+  displayUserLoginCard() {
+    let card3 = <UserLoginCard style={{"top": 6, "left": 840}}/>
+    return (
+      <Fragment>
+        {card3}
+      </Fragment>
+    )
+  }
+
   
 
 
@@ -489,6 +501,9 @@ class FormContainer extends Component {
         {this.displayFlippedCharacterCards()}
 
         {this.displayExtendedCharacterCards()}
+
+        {this.displayUserLoginCard()}
+
 
         {this.displaySearchPreferenceOutput()}
 

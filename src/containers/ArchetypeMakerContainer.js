@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import ArchetypeMakerForm from '../components/forms/ArchetypeMakerForm'
+
 
 class ArchetypeMakerContainer extends Component {
 
@@ -7,6 +9,8 @@ class ArchetypeMakerContainer extends Component {
         return (
             <div id="archetype-maker-container">
                 Hi Hi hi hih ih
+
+                <ArchetypeMakerForm />
             </div>
         )
     }

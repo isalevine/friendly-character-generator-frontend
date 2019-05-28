@@ -112,6 +112,9 @@ class UserLoginCard extends Component {
           <Fragment>
           <div className="card card-form" style={this.props.style}>
             <div className="card-text">
+
+              <strong>COMING SOON:</strong><br /><br /><br />
+
               <form id="user-login-form" onSubmit={this.handleSubmitLogin}>
                 <strong>Login to create new character Archetypes!</strong><br />
                 <label>Username</label>

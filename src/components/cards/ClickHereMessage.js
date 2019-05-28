@@ -15,7 +15,7 @@ class ClickHereMessage extends Component {
   }
 
   handleClick = () => {
-    // REFACTOR: if cards maxed/convertedCharacter is found, click should RESET!
+    // REFACTOR: if cards maxed/convertedCharacter is found, click should RESET! => setState back to default?? (temp: just go back to main menu...)
     // 
     if (this.props.convertedCharacters.length > 0 || this.props.nextCard === 4) {
       // let div = document.getElementById('deck-click-here-box')

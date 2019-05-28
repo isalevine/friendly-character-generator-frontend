@@ -21,9 +21,12 @@ code {
 
 /* smoke background formatting from https://codepen.io/Capse/pen/epmwRj */
 #fond{
+  position: absolute;
+  z-index: -5;
 	height:586px;
 	width:753px;
     margin: 0 auto;
+    /* margin-left: 50%; */
 	background-color:#a1847a;
 }
 #fume{

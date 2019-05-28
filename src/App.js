@@ -31,7 +31,21 @@ class App extends Component {
             <Route path="/archetype_maker" component={ArchetypeMakerContainer} />
           </div>
 
-          <div id="fond">
+          <div id="fond" style={{"margin-left": "-10%"}}>
+            <div id="fume">
+              <div id="masque"
+              ></div>
+            </div>
+          </div>
+
+          <div id="fond" style={{"margin-left": "25%"}}>
+            <div id="fume">
+              <div id="masque"
+              ></div>
+            </div>
+          </div>
+
+          <div id="fond" style={{"margin-left": "60%"}}>
             <div id="fume">
               <div id="masque"
               ></div>

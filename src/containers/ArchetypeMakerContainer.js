@@ -4,7 +4,11 @@ import React, {Component} from 'react';
 class ArchetypeMakerContainer extends Component {
 
     render() {
-        return <h1>hi</h1>
+        return (
+            <div id="archetype-maker-container">
+                Hi Hi hi hih ih
+            </div>
+        )
     }
 
 }

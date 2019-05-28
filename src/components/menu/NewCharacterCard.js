@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
+import NewCharacterButton from './NewCharacterButton'
+
 
 class NewCharacterCard extends Component {
 
@@ -10,6 +12,8 @@ class NewCharacterCard extends Component {
             <div className="card-text">
                 Create a New Character!
             </div>
+
+            <NewCharacterButton history={this.props.history}/>
           </div>
         </Fragment>
       )

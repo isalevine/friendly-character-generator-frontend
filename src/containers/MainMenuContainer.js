@@ -8,10 +8,21 @@ import CardFloatingIsland from '../components/art/CardFloatingIsland'
 import DeckFloatingIsland from '../components/art/DeckFloatingIsland'
 
 
-// lots of functions are copied from FormContainer,
+// lots of functions are copied from NewCharacterFormContainer,
 // consider refactoring to pass as props instead?
 
 class MainMenuContainer extends Component {
+
+  disableForms() {
+    let forms = Array.from(document.getElementsByClassName("card-form"))
+    forms.forEach(form => {
+      form.classList.add("unclickable")
+      form.style.transition = "2s linear"
+      form.style.left = "6px"
+    })
+    let div = document.getElementById('deck-click-here-box')
+    div.classList.add('fadeout-effect')
+  }
 
 
     displayCardDeck = () => {
@@ -28,7 +39,7 @@ class MainMenuContainer extends Component {
     }
 
     displayNewCharacterCard() {
-        let card1 = <NewCharacterCard style={{"top": 6, "left": 300}}/>
+        let card1 = <NewCharacterCard style={{"top": 6, "left": 300}} history={this.props.history}/>
         let island1 = <CardFloatingIsland style={{"top": 400, "left": 320}}/>
         return (
           <Fragment>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 
 
 class ClickHereMessage extends Component {
@@ -15,12 +15,16 @@ class ClickHereMessage extends Component {
   }
 
   handleClick = () => {
-    if (this.props.nextCard === 4) {
-      let div = document.getElementById('deck-click-here-box')
-      div.classList.add('fadeout-effect')
-      setTimeout(() => {
-        div.remove()
-      }, 1000)
+    // REFACTOR: if cards maxed/convertedCharacter is found, click should RESET!
+    // 
+    if (this.props.convertedCharacters.length > 0 || this.props.nextCard === 4) {
+      // let div = document.getElementById('deck-click-here-box')
+      // div.classList.add('fadeout-effect')
+      // setTimeout(() => {
+      //   div.remove()
+      // }, 1000)
+
+      this.props.history.push('/')
     } 
 
     if (this.props.nextCard < 5) {
@@ -28,6 +32,39 @@ class ClickHereMessage extends Component {
     }
     else {
       console.log("All cards already drawn!")
+    }
+  }
+
+  displayText = () => {
+    if (this.props.convertedCharacters.length > 0) {
+      return (
+        <Fragment>
+          Click<br />
+          to<br />
+          go<br />
+          back!
+        </Fragment>
+      )
+
+    } else if (this.props.nextCard === 1 ) {
+      return (
+        <Fragment>
+          Click<br />
+          here<br />
+          to<br />
+          start!
+        </Fragment>
+      )
+
+    } else {
+      return (
+        <Fragment>
+          Click<br />
+          here<br />
+          to<br />
+          flip!
+        </Fragment>
+      ) 
     }
   }
 
@@ -40,10 +77,7 @@ class ClickHereMessage extends Component {
       onMouseLeave={this.handleMouseLeave}
       onClick={this.handleClick}>
         <div id="deck-click-here-text" className="click-here-text" style={{"position": "absolute", "top": "10%", "left": "22%"}}>
-          Click<br />
-          here<br />
-          to<br />
-          flip!
+          {this.displayText()}
         </div>
 
       </div>

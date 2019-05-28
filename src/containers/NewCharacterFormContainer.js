@@ -19,6 +19,7 @@ import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 import ConvertedCharacter from '../components/characters/ConvertedCharacter'
 import ExtendedCharacter from '../components/characters/ExtendedCharacter'
 import CardFloatingIsland from '../components/art/CardFloatingIsland'
+import DeckFloatingIsland from '../components/art/DeckFloatingIsland'
 
 
 
@@ -277,7 +278,7 @@ class NewCharacterFormContainer extends Component {
       form.style.left = "6px"
     })
     let div = document.getElementById('deck-click-here-box')
-    div.classList.add('fadeout-effect')
+    // div.classList.add('fadeout-effect')
   }
 
 
@@ -353,7 +354,11 @@ class NewCharacterFormContainer extends Component {
             flipCard={this.flipCard}
             nextCard={this.state.nextCard}
             fetchGameSystem={this.fetchGameSystem}
+            convertedCharacters={this.state.convertedCharacters}
+            history={this.props.history}
           />
+
+          <DeckFloatingIsland style={{"top": 380, "left": -37}} />
       </div>
     )
   }
@@ -467,7 +472,7 @@ class NewCharacterFormContainer extends Component {
     let card2;
     // HARDCODED to only render 1 card, with only convertedCharacters[0], at card2 location (left: 570)
     if (this.state.convertedCharacters.length > 0 && this.state.showExtendedCharacter) {
-      card2 = <ExtendedCharacter style={{"top": 6, "left": 570}}
+      card2 = <ExtendedCharacter style={{"top": 6, "left": 300}}
         convertedCharacter={this.state.convertedCharacters[0]}
       />
     }

@@ -141,6 +141,8 @@ img {
 .card-floating-island {
   position: absolute;
   z-index: 0;
+  width: 280px;
+  height: 170px;
   margin: 0;
 }
 

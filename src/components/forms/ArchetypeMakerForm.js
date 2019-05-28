@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
+import {API_URL, CONVERTER_URL, HEADERS} from '../../constants/index'
+
 
 
 class ArchetypeMakerForm extends Component {
@@ -56,8 +58,20 @@ class ArchetypeMakerForm extends Component {
                     dnd_skill1: "acrobatics",
                     dnd_skill2: "animal_handling",
                     dnd_skill3: "arcana"
+                },
+                searchList: {
+                    search_playstyle_pref: "",
+                    search_action_pref: "",
+                    search_stat_pref: "",
+                    search_power_pref: ""
                 }
             },
+            playstyle_pref_options: ["physical", "mental", "social"],
+            action_pref_options: [],
+            stat_pref_options: ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"],
+            power_pref_options: ["damage", "heal", "stealth", "mind", "control"],
+            
+
             stat_options: ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"],
             skill_options: ["athletics_dodge", "awareness", "deception", "feats_of_strength", "intimidation", "investigation", "larceny_crime", "magic_computer", "performance", "persuasion", "socialize", "stealth"],
             
@@ -137,19 +151,58 @@ class ArchetypeMakerForm extends Component {
         this.setState({formData: newFormData})
     }
 
+    handleChangeSearchList = (ev) => {
+        let newFormData = {...this.state.formData}
+        newFormData["systemUniqueDnd"][ev.target.name] = ev.target.value
+        this.setState({formData: newFormData})
+    }
 
+    formPreventDefault = (ev) => {
+        ev.preventDefault();
+    }
+
+    handleSubmit = (ev) => {
+        this.fetchPostNewArchetype()
+    }
+
+    
+
+
+    fetchPostNewArchetype = () => {
+        let url = API_URL + "/new_archetype"
+        let config = {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify(this.state.formData)
+        }
+        fetch(url, config)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            // debugger
+        })
+    }
+
+
+
+    // MUST ADD IN PREFERENCES FOR INITIAL ARCHETYPE SEARCH!!
+    // t.integer "archetype_id"
+    // t.string "search_playstyle_pref"
+    // t.string "search_action_pref"
+    // t.string "search_stat_pref"
+    // t.string "search_power_pref"
     render() {
         return (
             <div id="archetype-maker-all-forms">
                 This is the form div
 
-                <form id="archetype-maker-form-general" onChange={this.handleChangeGeneral}>
+                <form id="archetype-maker-form-general" onChange={this.handleChangeGeneral} onSubmit={this.formPreventDefault}>
                     <label name="name"><strong>Archetype Name:</strong></label><br />
                     <input type="text" name="name" placeholder="archetype name"/>
                 </form><br />
 
 
-                <form id="archetype-maker-form-stats" onChange={this.handleChangeStats}>
+                <form id="archetype-maker-form-stats" onChange={this.handleChangeStats} onSubmit={this.formPreventDefault}>
                     <strong>Rank stats by priority.</strong><br />
                     Selections must be unique!<br />
                     <label name="stat1">Stat #1:</label>
@@ -179,7 +232,7 @@ class ArchetypeMakerForm extends Component {
                 </form><br />
 
                 
-                <form id="archetype-maker-form-skills" onChange={this.handleChangeSkills}>
+                <form id="archetype-maker-form-skills" onChange={this.handleChangeSkills} onSubmit={this.formPreventDefault}>
                     <strong>Rank skills by priority.</strong><br />
                     Select duplicates to prioritize similarly-grouped skills.<br />
                     (ex. magic_computer => Arcana and Religion)<br />
@@ -211,7 +264,7 @@ class ArchetypeMakerForm extends Component {
                 </form><br />
 
 
-                <form id="archetype-maker-form-powers" onChange={this.handleChangePowers}>
+                <form id="archetype-maker-form-powers" onChange={this.handleChangePowers} onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when prioritizing powers.</strong><br />
                     (ex. "sword", "extra attacks", "fire", etc.)<br />
                     <label name="power1">Power #1:</label>
@@ -229,7 +282,7 @@ class ArchetypeMakerForm extends Component {
                 </form><br />
 
 
-                <form id="archetype-maker-form-snippets" onChange={this.handleChangeSnippets}>
+                <form id="archetype-maker-form-snippets" onChange={this.handleChangeSnippets} onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when generating their backstory.</strong><br />
                     (ex. "mountain", "performing", "fire", etc.)<br />
                     <label name="snippet1">Snippet #1:</label>
@@ -247,7 +300,7 @@ class ArchetypeMakerForm extends Component {
                 </form><br />
 
 
-                <form id="archetype-maker-form-system-unique-dnd" onChange={this.handleChangeSystemUniqueDnd}>
+                <form id="archetype-maker-form-system-unique-dnd" onChange={this.handleChangeSystemUniqueDnd} onSubmit={this.formPreventDefault}>
                     <strong>Enter any custom defaults for DnD's system-unique parameters.</strong><br />
                     <label name="dnd_class">DnD Class:</label>
                     <select name="dnd_class" value={this.state.formData.systemUniqueDnd.dnd_class}>
@@ -284,6 +337,14 @@ class ArchetypeMakerForm extends Component {
                         {this.renderDndSkillList()}
                     </select><br />
                 </form>
+
+                <form id="archetype-maker-form-search-list" onChange={this.handleChangeSearchList} onSubmit={this.formPreventDefault}>
+                    <strong>Enter up to six terms to use when generating their backstory.</strong><br />
+                    (ex. "mountain", "performing", "fire", etc.)<br />
+                </form><br />
+
+                <br /><br />
+                <button onClick={this.handleSubmit}>Create Archetype!</button>
 
             </div>
         )

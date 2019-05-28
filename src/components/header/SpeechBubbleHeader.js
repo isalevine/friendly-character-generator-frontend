@@ -11,7 +11,7 @@ class SpeechBubbleHeader extends Component {
                 <div className="speech-bubble header">
                     <h3>Welcome to Friendly Character Generator!</h3>
                     I am currently generating characters for: <strong>Dungeons and Dragons, 5th Edition. </strong>
-                    To begin creating a new character, click the <strong>"Create New Character!"</strong> button below.
+                    To begin, click the <strong>"Create New Character!"</strong> button below.
                 
                     <MageFloatingIsland />
                 </div>

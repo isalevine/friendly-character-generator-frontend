@@ -40,7 +40,7 @@ class MainMenuContainer extends Component {
 
     displayNewCharacterCard() {
         let card1 = <NewCharacterCard style={{"top": 6, "left": 300}} history={this.props.history}/>
-        let island1 = <CardFloatingIsland style={{"top": 400, "left": 320}}/>
+        let island1 = <CardFloatingIsland style={{"top": 390, "left": 290}}/>
         return (
           <Fragment>
             {card1}
@@ -51,7 +51,7 @@ class MainMenuContainer extends Component {
 
     displayLearnMoreCard() {
         let card2 = <LearnMoreCard style={{"top": 6, "left": 570}}/>
-        let island2 = <CardFloatingIsland style={{"top": 400, "left": 590}}/>
+        let island2 = <CardFloatingIsland style={{"top": 390, "left": 560}}/>
         return (
           <Fragment>
             {card2}
@@ -62,7 +62,7 @@ class MainMenuContainer extends Component {
 
     displayUserLoginCard() {
         let card3 = <UserLoginCard style={{"top": 6, "left": 840}}/>
-        let island3 = <CardFloatingIsland style={{"top": 400, "left": 860}}/>
+        let island3 = <CardFloatingIsland style={{"top": 390, "left": 830}}/>
         return (
           <Fragment>
             {card3}

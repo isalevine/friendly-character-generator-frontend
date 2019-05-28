@@ -391,9 +391,9 @@ class NewCharacterFormContainer extends Component {
       //   card4 = <BlankCard style={{"top": 6, "left": 1110}} />
       // }
 
-      let island1 = <CardFloatingIsland style={{"top": 400, "left": 320}}/>
-      let island2 = <CardFloatingIsland style={{"top": 400, "left": 590}}/>
-      let island3 = <CardFloatingIsland style={{"top": 400, "left": 860}}/>
+      let island1 = <CardFloatingIsland style={{"top": 390, "left": 290}}/>
+      let island2 = <CardFloatingIsland style={{"top": 390, "left": 560}}/>
+      let island3 = <CardFloatingIsland style={{"top": 390, "left": 830}}/>
 
       return (
         <Fragment>

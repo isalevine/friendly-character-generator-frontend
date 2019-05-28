@@ -38,12 +38,7 @@ class App extends Component {
             </div>
           </div>
 
-          <div id="fond" style={{"marginLeft": "25%"}}>
-            <div id="fume">
-              <div id="masque"
-              ></div>
-            </div>
-          </div>
+
 
           <div id="fond" style={{"marginLeft": "60%"}}>
             <div id="fume">
@@ -68,7 +63,12 @@ export default App;
 // </div>
 
 
-
+{/* <div id="fond" style={{"marginLeft": "25%"}}>
+<div id="fume">
+  <div id="masque"
+  ></div>
+</div>
+</div> */}
 
 
           

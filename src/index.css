@@ -7,7 +7,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: plum;
+  /* background-color: plum; */
+  background-color: black;
 }
 
 code {
@@ -16,12 +17,94 @@ code {
 }
 
 
+
+
+/* smoke background formatting from https://codepen.io/Capse/pen/epmwRj */
+#fond{
+	height:586px;
+	width:753px;
+    margin: 0 auto;
+	background-color:#a1847a;
+}
+#fume{
+	width:753px; height:586px;
+	background-image:url(http://dev.graphiste-webdesign.fr/fumee/images/fdbig.png);
+	background-position:100px 0;
+	background-repeat:no-repeat;
+    
+    animation: defil 12s infinite;
+	animation-timing-function: linear;
+}
+#masque{
+	width:753px; height:586px;
+	background-image:url(http://dev.graphiste-webdesign.fr/fumee/images/masque.png);
+	background-repeat:no-repeat;
+	background-position:top center;
+}
+img {
+	margin-left:313px;
+	margin-top:485px;
+}
+
+@keyframes defil {
+    0%   {background-position:100px 0;}
+    100% {background-position:100px -1983px;}
+}
+
+
+
+
+
 .header {
-  position: fixed;
-  width: 100%;
-  height: 70px;
+  /* position: fixed; */
+  width: 92%;
+  /* height: 70px; */
   background-color: cornflowerblue;
 }
+
+
+/* speech bubble formatting from https://codepen.io/JoeHastings/pen/gPrPMo */
+.speech-bubble {
+	position: relative;
+	/* width: 300px; */
+	text-align: center;
+	/* line-height: 1.4em; */
+  margin-top: 10px;
+  margin-left: 26px;
+	/* background-color: #fff; */
+	border: 8px solid #333;
+	border-radius: 30px;
+	/* font-family: sans-serif; */
+  padding-top: 5px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+	font-size: large;
+}
+
+.speech-bubble:before,
+.speech-bubble:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+.speech-bubble:before {
+	left: 88%;
+	bottom: -50px;
+	border: 25px solid;
+	border-color: #333 transparent transparent #333;
+}
+
+.speech-bubble:after {
+	left: 88.56%;
+	bottom: -30px;
+	border: 15px solid;
+	border-color: cornflowerblue transparent transparent cornflowerblue;
+}
+
+
 
 
 
@@ -35,9 +118,9 @@ code {
 } */
 
 
-#form-container {
+.container {
   position: absolute;
-  top: 100px;
+  top: 150px;
   left: 30px;
 }
 
@@ -186,4 +269,22 @@ code {
 #show-extended-character-button {
   position: absolute;
   top: 84%
+}
+
+
+
+
+
+
+
+#archetype-maker-container {
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-style: solid;
+  border-width: 3px;
+  border-color: red;
 }

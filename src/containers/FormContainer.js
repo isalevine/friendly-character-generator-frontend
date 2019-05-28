@@ -18,7 +18,7 @@ import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 import ConvertedCharacter from '../components/characters/ConvertedCharacter'
 import ExtendedCharacter from '../components/characters/ExtendedCharacter'
-import UserLoginCard from '../components/menu/UserLoginCard'
+
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -477,22 +477,13 @@ class FormContainer extends Component {
   }
 
 
-  displayUserLoginCard() {
-    let card3 = <UserLoginCard style={{"top": 6, "left": 840}}/>
-    return (
-      <Fragment>
-        {card3}
-      </Fragment>
-    )
-  }
-
   
 
 
   render() {
 
     return (
-      <div id="form-container">
+      <div className="container">
 
         {this.displayCardDeck()}
 
@@ -502,14 +493,13 @@ class FormContainer extends Component {
 
         {this.displayExtendedCharacterCards()}
 
-        {this.displayUserLoginCard()}
+        
+
 
 
         {this.displaySearchPreferenceOutput()}
 
         {this.displaySearchListResults()}
-
-
 
       </div>
     )

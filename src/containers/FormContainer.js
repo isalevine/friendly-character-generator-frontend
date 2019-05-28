@@ -80,7 +80,6 @@ class FormContainer extends Component {
     this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
     this.displayExtendedCharacterCards = this.displayExtendedCharacterCards.bind(this)
     this.changeShowExtendedCharacter = this.changeShowExtendedCharacter.bind(this)
-    this.displayUserLoginCard = this.displayUserLoginCard.bind(this)
   }
 
   // fetch GameSystem on first load

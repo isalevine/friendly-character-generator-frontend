@@ -24,7 +24,7 @@ class MainMenuContainer extends Component {
     }
 
     displayNewCharacterCard() {
-        let card1 = <UserLoginCard style={{"top": 6, "left": 300}}/>
+        let card1 = <NewCharacterCard style={{"top": 6, "left": 300}}/>
         return (
           <Fragment>
             {card1}
@@ -33,7 +33,7 @@ class MainMenuContainer extends Component {
     }
 
     displayLearnMoreCard() {
-        let card2 = <UserLoginCard style={{"top": 6, "left": 570}}/>
+        let card2 = <LearnMoreCard style={{"top": 6, "left": 570}}/>
         return (
           <Fragment>
             {card2}

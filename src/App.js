@@ -27,7 +27,7 @@ class App extends Component {
 
           <div id="main-container">
             <Route path="/" exact component={MainMenuContainer} />
-            <Route path="/character_generator" component={FormContainer} />
+            <Route path="/new_character" component={FormContainer} />
             <Route path="/archetype_maker" component={ArchetypeMakerContainer} />
           </div>
 

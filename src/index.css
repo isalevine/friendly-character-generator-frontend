@@ -20,6 +20,10 @@ code {
 
 
 /* smoke background formatting from https://codepen.io/Capse/pen/epmwRj */
+/* REMEMBER TO CITE THE IMAGES SPECIFICALLY! THEY WERE DOWNLOADED AT:
+http://dev.graphiste-webdesign.fr/fumee/images/fdbig.png
+http://dev.graphiste-webdesign.fr/fumee/images/masque.png
+*/
 #fond{
   position: absolute;
   z-index: -5;
@@ -31,7 +35,7 @@ code {
 }
 #fume{
 	width:753px; height:586px;
-	background-image:url(http://dev.graphiste-webdesign.fr/fumee/images/fdbig.png);
+	background-image:url("./smoke-art/fdbig.png");
 	background-position:100px 0;
 	background-repeat:no-repeat;
     
@@ -40,7 +44,7 @@ code {
 }
 #masque{
 	width:753px; height:586px;
-	background-image:url(http://dev.graphiste-webdesign.fr/fumee/images/masque.png);
+	background-image:url("./smoke-art/masque.png");
 	background-repeat:no-repeat;
 	background-position:top center;
 }

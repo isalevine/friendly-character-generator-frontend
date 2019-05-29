@@ -45,7 +45,8 @@ class UserLoginCard extends Component {
       localStorage.setItem("user_id", data.user.id)
       localStorage.setItem("token", data.jwt)
       this.resetLoginForm()
-      debugger
+      this.setState({loggedIn: true, loginToken: data.jwt})
+      // debugger
     })
     .catch(error => console.error('Error: ', error))
   }
@@ -107,6 +108,75 @@ class UserLoginCard extends Component {
     this.fetchPostNewUser();
   }
 
+
+  handleReroute = () => {
+    this.props.history.push('/archetype_maker')
+  }
+
+  handleLogout = () => {
+    localStorage.clear()
+    this.setState({loggedIn: false, loginToken: null})
+  }
+
+
+  checkLoggedIn = () => {
+    if (localStorage.getItem("user_id") && localStorage.getItem("token")) {
+      return (
+        <Fragment>
+          <button onClick={this.handleReroute}>Create a new Archetype!</button>
+          <button onClick={this.handleLogout}>Logout</button>
+        </Fragment>
+      )
+    } else {
+      return (
+        <Fragment>
+          {this.renderUserLoginForm()}
+          {this.renderNewUserForm()}  
+        </Fragment>
+      )
+    }
+  }
+
+  renderUserLoginForm = () => {
+    return (
+      <form id="user-login-form" onSubmit={this.handleSubmitLogin}>
+        <strong>Login to create new character Archetypes!</strong><br />
+        <label>Username</label>
+        <input type="text" onChange={this.handleChangeLogin} name="username" value={this.state.loginForm.username}/><br />
+        <label>Password</label>
+        <input type="password" onChange={this.handleChangeLogin} name="password" value={this.state.loginForm.password}/><br />
+        <input type="submit" />
+      </form>
+    )
+  }
+
+  
+  renderNewUserForm = () => {
+    return (
+      <form id="new-user-form" onSubmit={this.handleSubmitNewUser}>
+        <strong>Create new account:</strong><br />
+        <label>Username</label>
+        <input type="text" name="username" onChange={this.handleChangeNewUser} value={this.state.newUserForm.username}/><br />
+        <label>Password</label>
+        <input type="password" name="password" onChange={this.handleChangeNewUser} value={this.state.newUserForm.password}/><br />
+        <label>Email address</label>
+        <input type="email" name="email" onChange={this.handleChangeNewUser} value={this.state.newUserForm.email}/><br />
+        <label>Real name</label>
+        <input type="text" name="name" onChange={this.handleChangeNewUser} value={this.state.newUserForm.name}/><br />
+        <label>Bio</label>
+        <input type="text" name="bio" onChange={this.handleChangeNewUser} value={this.state.newUserForm.bio}/><br />
+        <input type="submit" value="Create new account" />
+      </form>
+    )
+  }
+
+
+  renderArchetypeMakerButton = () => {
+
+  }
+
+
+
   render() {
       return (
           <Fragment>
@@ -115,31 +185,7 @@ class UserLoginCard extends Component {
 
               <strong>COMING SOON:</strong><br /><br /><br />
 
-              <form id="user-login-form" onSubmit={this.handleSubmitLogin}>
-                <strong>Login to create new character Archetypes!</strong><br />
-                <label>Username</label>
-                <input type="text" onChange={this.handleChangeLogin} name="username" /><br />
-                <label>Password</label>
-                <input type="password" onChange={this.handleChangeLogin} name="password" /><br />
-                <input type="submit" />
-              </form>
-  
-              <br />
-
-              <form id="new-user-form" onSubmit={this.handleSubmitNewUser}>
-                <strong>Create new account:</strong><br />
-                <label>Username</label>
-                <input type="text" name="username" onChange={this.handleChangeNewUser} value={this.state.newUserForm.username}/><br />
-                <label>Password</label>
-                <input type="password" name="password" onChange={this.handleChangeNewUser} value={this.state.newUserForm.password}/><br />
-                <label>Email address</label>
-                <input type="email" name="email" onChange={this.handleChangeNewUser} value={this.state.newUserForm.email}/><br />
-                <label>Real name</label>
-                <input type="text" name="name" onChange={this.handleChangeNewUser} value={this.state.newUserForm.name}/><br />
-                <label>Bio</label>
-                <input type="text" name="bio" onChange={this.handleChangeNewUser} value={this.state.newUserForm.bio}/><br />
-                <input type="submit" value="Create new account" />
-              </form>
+              {this.checkLoggedIn()}
   
             </div>
           </div>

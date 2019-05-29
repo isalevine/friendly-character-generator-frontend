@@ -60,16 +60,38 @@ class ArchetypeMakerForm extends Component {
                     dnd_skill3: "arcana"
                 },
                 searchList: {
-                    search_playstyle_pref: "",
-                    search_action_pref: "",
-                    search_stat_pref: "",
-                    search_power_pref: ""
+                    playstyle: {
+                        physical: false,
+                        mental: false,
+                        social: false,
+                    },
+                    action: {
+                        weapon: false,
+                        tank: false,
+                        sneak: false,
+                        spells: false,
+                        investigate: false,
+                        knowledge: false,
+                        leader: false,
+                        perform: false,
+                        manipulate: false,
+                        seduce: false,
+                    },
+                    stat: {},
+                    power: {
+                        damage: false,
+                        heal: false,
+                        stealth: false,
+                        mind: false,
+                        control: false,
+                        any: false,
+                    },
                 }
             },
             playstyle_pref_options: ["physical", "mental", "social"],
-            action_pref_options: [],
+            action_pref_options: ["weapon", "tank", "sneak", "spells", "investigate", "knowledge", "leader", "perform", "manipulate", "seduce"],
             stat_pref_options: ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"],
-            power_pref_options: ["damage", "heal", "stealth", "mind", "control"],
+            power_pref_options: ["damage", "heal", "stealth", "mind", "control", "any"],
             
 
             stat_options: ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"],
@@ -108,6 +130,46 @@ class ArchetypeMakerForm extends Component {
     renderDndSkillList = () => {
         return this.state.dnd_skill_list.map(dnd_skill => {
             return <option key={Math.random()} value={dnd_skill}>{dnd_skill}</option>
+        })
+    }
+
+    renderPlaystylePref = () => {
+        return this.state.playstyle_pref_options.map(playstyle => {
+            return (
+                <Fragment key={Math.random()}>
+                    <input type="checkbox" name="playstyle" value={playstyle} checked={this.state.formData.searchList.playstyle[playstyle]} onChange={this.handleChangeSearchListPlaystyle}/>  
+                    <label name="playstyle">{playstyle}</label>
+                    <br />
+                </Fragment>
+            )
+        })
+    }
+
+    renderActionPref = () => {
+        return this.state.action_pref_options.map(action => {
+            return (
+                <Fragment key={Math.random()}>
+                    <input type="checkbox" name="action" value={action} checked={this.state.formData.searchList.action[action]} onChange={this.handleChangeSearchListAction}/>  
+                    <label name="action">{action}</label>
+                    <br />
+                </Fragment>
+            )
+        })
+    }
+
+    // renderStatPref = () => {
+    //     currently disabled from SearchList matching 
+    // }
+
+    renderPowerPref = () => {
+        return this.state.power_pref_options.map(power => {
+            return (
+                <Fragment key={Math.random()}>
+                    <input type="checkbox" name="power" value={power} checked={this.state.formData.searchList.power[power]} onChange={this.handleChangeSearchListPower}/>  
+                    <label name="power">{power}</label>
+                    <br />
+                </Fragment>
+            )
         })
     }
 
@@ -151,11 +213,27 @@ class ArchetypeMakerForm extends Component {
         this.setState({formData: newFormData})
     }
 
-    handleChangeSearchList = (ev) => {
+
+
+    handleChangeSearchListPlaystyle = (ev) => {
         let newFormData = {...this.state.formData}
-        newFormData["systemUniqueDnd"][ev.target.name] = ev.target.value
+        newFormData["searchList"][ev.target.name][ev.target.value] = !newFormData["searchList"][ev.target.name][ev.target.value]
         this.setState({formData: newFormData})
     }
+
+    handleChangeSearchListAction = (ev) => {
+        let newFormData = {...this.state.formData}
+        newFormData["searchList"][ev.target.name][ev.target.value] = !newFormData["searchList"][ev.target.name][ev.target.value]
+        this.setState({formData: newFormData})
+    }
+
+    handleChangeSearchListPower = (ev) => {
+        let newFormData = {...this.state.formData}
+        newFormData["searchList"][ev.target.name][ev.target.value] = !newFormData["searchList"][ev.target.name][ev.target.value]
+        this.setState({formData: newFormData})
+    }
+
+
 
     formPreventDefault = (ev) => {
         ev.preventDefault();
@@ -172,7 +250,11 @@ class ArchetypeMakerForm extends Component {
         let url = API_URL + "/new_archetype"
         let config = {
             method: "POST",
-            headers: HEADERS,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify(this.state.formData)
         }
         fetch(url, config)
@@ -196,152 +278,166 @@ class ArchetypeMakerForm extends Component {
             <div id="archetype-maker-all-forms">
                 This is the form div
 
-                <form id="archetype-maker-form-general" onChange={this.handleChangeGeneral} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-general"  onSubmit={this.formPreventDefault}>
                     <label name="name"><strong>Archetype Name:</strong></label><br />
-                    <input type="text" name="name" placeholder="archetype name"/>
+                    <input type="text" name="name" placeholder="archetype name" onChange={this.handleChangeGeneral}/>
                 </form><br />
 
 
-                <form id="archetype-maker-form-stats" onChange={this.handleChangeStats} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-stats" onSubmit={this.formPreventDefault}>
                     <strong>Rank stats by priority.</strong><br />
                     Selections must be unique!<br />
                     <label name="stat1">Stat #1:</label>
-                    <select name="stat1" value={this.state.formData.stats.stat1}>
+                    <select name="stat1" value={this.state.formData.stats.stat1} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                     <label name="stat2">Stat #2:</label>
-                    <select name="stat2" value={this.state.formData.stats.stat2}>
+                    <select name="stat2" value={this.state.formData.stats.stat2} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                     <label name="stat3">Stat #3:</label>
-                    <select name="stat3" value={this.state.formData.stats.stat3}>
+                    <select name="stat3" value={this.state.formData.stats.stat3} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                     <label name="stat4">Stat #4:</label>
-                    <select name="stat4" value={this.state.formData.stats.stat4}>
+                    <select name="stat4" value={this.state.formData.stats.stat4} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                     <label name="stat5">Stat #5:</label>
-                    <select name="stat5" value={this.state.formData.stats.stat5}>
+                    <select name="stat5" value={this.state.formData.stats.stat5} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                     <label name="stat6">Stat #6:</label>
-                    <select name="stat6" value={this.state.formData.stats.stat6}>
+                    <select name="stat6" value={this.state.formData.stats.stat6} onChange={this.handleChangeStats}>
                         {this.renderStatOptions()}
                     </select><br />
                 </form><br />
 
                 
-                <form id="archetype-maker-form-skills" onChange={this.handleChangeSkills} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-skills" onSubmit={this.formPreventDefault}>
                     <strong>Rank skills by priority.</strong><br />
                     Select duplicates to prioritize similarly-grouped skills.<br />
                     (ex. magic_computer => Arcana and Religion)<br />
                     <label name="skill1">Skill #1:</label>
-                    <select name="skill1" value={this.state.formData.skills.skill1}>
+                    <select name="skill1" value={this.state.formData.skills.skill1} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     <label name="skill2">Skill #2:</label>
-                    <select name="skill2" value={this.state.formData.skills.skill2}>
+                    <select name="skill2" value={this.state.formData.skills.skill2} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     <label name="skill3">Skill #3:</label>
-                    <select name="skill3" value={this.state.formData.skills.skill3}>
+                    <select name="skill3" value={this.state.formData.skills.skill3} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     <label name="skill4">Skill #4:</label>
-                    <select name="skill4" value={this.state.formData.skills.skill4}>
+                    <select name="skill4" value={this.state.formData.skills.skill4} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     <label name="skill5">Skill #5:</label>
-                    <select name="skill5" value={this.state.formData.skills.skill5}>
+                    <select name="skill5" value={this.state.formData.skills.skill5} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     <label name="skill6">Skill #6:</label>
-                    <select name="skill6" value={this.state.formData.skills.skill6}>
+                    <select name="skill6" value={this.state.formData.skills.skill6} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
                     (COMING SOON: cyberpunk expansions via magic_computer)<br />
                 </form><br />
 
 
-                <form id="archetype-maker-form-powers" onChange={this.handleChangePowers} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-powers" onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when prioritizing powers.</strong><br />
                     (ex. "sword", "extra attacks", "fire", etc.)<br />
                     <label name="power1">Power #1:</label>
-                    <input type="text" name="power1" placeholder="search term" value={this.state.formData.powers.power1}/><br />
+                    <input type="text" name="power1" placeholder="search term" value={this.state.formData.powers.power1} onChange={this.handleChangePowers}/><br />
                     <label name="power2">Power #2:</label>
-                    <input type="text" name="power2" placeholder="search term" value={this.state.formData.powers.power2}/><br />
+                    <input type="text" name="power2" placeholder="search term" value={this.state.formData.powers.power2} onChange={this.handleChangePowers}/><br />
                     <label name="power3">Power #3:</label>
-                    <input type="text" name="power3" placeholder="search term" value={this.state.formData.powers.power3}/><br />
+                    <input type="text" name="power3" placeholder="search term" value={this.state.formData.powers.power3} onChange={this.handleChangePowers}/><br />
                     <label name="power4">Power #4:</label>
-                    <input type="text" name="power4" placeholder="search term" value={this.state.formData.powers.power4}/><br />
+                    <input type="text" name="power4" placeholder="search term" value={this.state.formData.powers.power4} onChange={this.handleChangePowers}/><br />
                     <label name="power5">Power #5:</label>
-                    <input type="text" name="power5" placeholder="search term" value={this.state.formData.powers.power5}/><br />
+                    <input type="text" name="power5" placeholder="search term" value={this.state.formData.powers.power5} onChange={this.handleChangePowers}/><br />
                     <label name="power6">Power #6:</label>
-                    <input type="text" name="power6" placeholder="search term" value={this.state.formData.powers.power6}/><br />
+                    <input type="text" name="power6" placeholder="search term" value={this.state.formData.powers.power6} onChange={this.handleChangePowers}/><br />
                 </form><br />
 
 
-                <form id="archetype-maker-form-snippets" onChange={this.handleChangeSnippets} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-snippets" onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when generating their backstory.</strong><br />
                     (ex. "mountain", "performing", "fire", etc.)<br />
                     <label name="snippet1">Snippet #1:</label>
-                    <input type="text" name="snippet1" placeholder="search term" value={this.state.formData.snippets.snippet1}/><br />
+                    <input type="text" name="snippet1" placeholder="search term" value={this.state.formData.snippets.snippet1} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet2">Snippet #2:</label>
-                    <input type="text" name="snippet2" placeholder="search term" value={this.state.formData.snippets.snippet2}/><br />
+                    <input type="text" name="snippet2" placeholder="search term" value={this.state.formData.snippets.snippet2} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet3">Snippet #3:</label>
-                    <input type="text" name="snippet3" placeholder="search term" value={this.state.formData.snippets.snippet3}/><br />
+                    <input type="text" name="snippet3" placeholder="search term" value={this.state.formData.snippets.snippet3} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet4">Snippet #4:</label>
-                    <input type="text" name="snippet4" placeholder="search term" value={this.state.formData.snippets.snippet4}/><br />
+                    <input type="text" name="snippet4" placeholder="search term" value={this.state.formData.snippets.snippet4} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet5">Snippet #5:</label>
-                    <input type="text" name="snippet5" placeholder="search term" value={this.state.formData.snippets.snippet5}/><br />
+                    <input type="text" name="snippet5" placeholder="search term" value={this.state.formData.snippets.snippet5} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet6">Snippet #6:</label>
-                    <input type="text" name="snippet6" placeholder="search term" value={this.state.formData.snippets.snippet6}/><br />
+                    <input type="text" name="snippet6" placeholder="search term" value={this.state.formData.snippets.snippet6} onChange={this.handleChangeSnippets}/><br />
                 </form><br />
 
 
-                <form id="archetype-maker-form-system-unique-dnd" onChange={this.handleChangeSystemUniqueDnd} onSubmit={this.formPreventDefault}>
+                <form id="archetype-maker-form-system-unique-dnd" onSubmit={this.formPreventDefault}>
                     <strong>Enter any custom defaults for DnD's system-unique parameters.</strong><br />
                     <label name="dnd_class">DnD Class:</label>
-                    <select name="dnd_class" value={this.state.formData.systemUniqueDnd.dnd_class}>
+                    <select name="dnd_class" value={this.state.formData.systemUniqueDnd.dnd_class} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndClassList()}
                     </select><br />
                     <label name="dnd_race">DnD Race:</label>
-                    <select name="dnd_race" value={this.state.formData.systemUniqueDnd.dnd_race}>
+                    <select name="dnd_race" value={this.state.formData.systemUniqueDnd.dnd_race} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndRaceList()}
                     </select><br />
 
                     <label name="alignment">Alignment:</label>
-                    <input type="text" name="alignment" value={this.state.formData.systemUniqueDnd.alignment}/><br />
+                    <input type="text" name="alignment" value={this.state.formData.systemUniqueDnd.alignment} onChange={this.handleChangeSystemUniqueDnd}/><br />
                     <label name="equipment">Equipment:</label>
-                    <input type="text" name="equipment" value={this.state.formData.systemUniqueDnd.equipment}/><br />
+                    <input type="text" name="equipment" value={this.state.formData.systemUniqueDnd.equipment} onChange={this.handleChangeSystemUniqueDnd}/><br />
                     <label name="hit_points">Hit Points:</label>
-                    <input type="text" name="hit_points" value={this.state.formData.systemUniqueDnd.hit_points}/><br />
+                    <input type="text" name="hit_points" value={this.state.formData.systemUniqueDnd.hit_points} onChange={this.handleChangeSystemUniqueDnd}/><br />
                     <label name="armor_class">Armor Class:</label>
-                    <input type="text" name="armor_class" value={this.state.formData.systemUniqueDnd.armor_class}/><br />
+                    <input type="text" name="armor_class" value={this.state.formData.systemUniqueDnd.armor_class} onChange={this.handleChangeSystemUniqueDnd}/><br />
                     <label name="ability_modifiers">Ability Modifiers:</label>
-                    <input type="text" name="ability_modifiers" value={this.state.formData.systemUniqueDnd.ability_modifiers}/><br />
+                    <input type="text" name="ability_modifiers" value={this.state.formData.systemUniqueDnd.ability_modifiers} onChange={this.handleChangeSystemUniqueDnd}/><br />
 
                     <br />
                     <strong>DnD system-specific skill preferences:</strong><br />
                     <label name="dnd_skill1">DnD Skill Preference #1:</label>
-                    <select name="dnd_skill1" value={this.state.formData.systemUniqueDnd.dnd_skill1}>
+                    <select name="dnd_skill1" value={this.state.formData.systemUniqueDnd.dnd_skill1} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
                     <label name="dnd_skill2">DnD Skill Preference #2:</label>
-                    <select name="dnd_skill2" value={this.state.formData.systemUniqueDnd.dnd_skill2}>
+                    <select name="dnd_skill2" value={this.state.formData.systemUniqueDnd.dnd_skill2} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
                     <label name="dnd_skill3">DnD Skill Preference #3:</label>
-                    <select name="dnd_skill3" value={this.state.formData.systemUniqueDnd.dnd_skill3}>
+                    <select name="dnd_skill3" value={this.state.formData.systemUniqueDnd.dnd_skill3} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
-                </form>
-
-                <form id="archetype-maker-form-search-list" onChange={this.handleChangeSearchList} onSubmit={this.formPreventDefault}>
-                    <strong>Enter up to six terms to use when generating their backstory.</strong><br />
-                    (ex. "mountain", "performing", "fire", etc.)<br />
                 </form><br />
+
+                
+
+                <strong>Select search terms that can match users to this Archetype.</strong><br />
+                   
+                <form id="archetype-maker-form-search-list-playstyle" onSubmit={this.formPreventDefault}>   
+                    Playstyle:<br />
+                    {this.renderPlaystylePref()}<br />
+                </form><br />
+                <form id="archetype-maker-form-search-list-action" onSubmit={this.formPreventDefault}>   
+                    Action:<br />
+                    {this.renderActionPref()}<br />
+                </form><br />
+                <form id="archetype-maker-form-search-list-power" onSubmit={this.formPreventDefault}>   
+                    Power:<br />
+                    {this.renderPowerPref()}<br />
+                </form><br />
+                    
+
 
                 <br /><br />
                 <button onClick={this.handleSubmit}>Create Archetype!</button>

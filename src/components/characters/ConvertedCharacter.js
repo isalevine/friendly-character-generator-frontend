@@ -8,6 +8,8 @@ class ConvertedCharacter extends Component {
     parseConvertedCharacter = () => {
         let character = this.props.convertedCharacter
 
+        console.log(character)
+
         let header = <Fragment>
             <strong>Archetype: </strong> {character.archetype_name ? `${character.archetype_name}` : null} <br/>
             <strong>{character.race.alias}: </strong> {character.race ? `${character.race.race}` : null} <br/> 

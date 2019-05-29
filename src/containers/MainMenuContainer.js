@@ -61,7 +61,7 @@ class MainMenuContainer extends Component {
     }
 
     displayUserLoginCard() {
-        let card3 = <UserLoginCard style={{"top": 6, "left": 840}}/>
+        let card3 = <UserLoginCard style={{"top": 6, "left": 840}} history={this.props.history}/>
         let island3 = <CardFloatingIsland style={{"top": 390, "left": 830}}/>
         return (
           <Fragment>

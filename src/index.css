@@ -430,17 +430,18 @@ img {
   top: 84%
 }
 
-
-
-
-
-
-
-
-
-
-
-
+.print-extended-card-button {
+  position: relative;
+  top: 30px;
+  left: 20%;
+  width: 60%;
+  height: 50px;
+  border-color: blue;
+  border-width: 3px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: aquamarine;
+}
 
 
 

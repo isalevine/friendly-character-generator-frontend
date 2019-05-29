@@ -28,7 +28,7 @@ class LearnMoreFullSize extends Component {
                 <br /><br />
 
                 <strong>COMING SOON:</strong><br /><br />
-                You will be able to log in to ArchetypeMaker to create and contribute your own backstory snippets to the character generator!
+                You will be able to log in to create and contribute your own backstory snippets to the character generator!
 
 
 

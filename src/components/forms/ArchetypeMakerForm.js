@@ -262,6 +262,8 @@ class ArchetypeMakerForm extends Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            window.alert("New Archetype saved successfully! Press OK to return to main menu.")
+            this.props.history.push('/')
             // debugger
         })
     }

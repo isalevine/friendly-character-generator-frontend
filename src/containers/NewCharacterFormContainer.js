@@ -297,8 +297,7 @@ class NewCharacterFormContainer extends Component {
       data.forEach(search_list => {
         if (search_list.search_playstyle_pref.includes(this.state.formSearchPreference.playstyle_preference) &&
         search_list.search_action_pref.includes(this.state.formSearchPreference.action_preference) &&
-        (search_list.search_power_pref.includes(this.state.formSearchPreference.power_preference) ||
-         search_list.search_power_pref === "any")
+        (search_list.search_power_pref.includes(this.state.formSearchPreference.power_preference) || search_list.search_power_pref === "any")
        ) {
          // console.log("Match found! search_list: ", search_list)
          SearchLists.push(search_list)

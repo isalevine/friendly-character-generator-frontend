@@ -9,6 +9,14 @@ class ExtendedCharacter extends Component {
     parseConvertedCharacter = () => {
         let character = this.props.convertedCharacter
 
+        let credits = 
+        <Fragment>
+            <strong>CREATED BY FRIENDLY CHARACTER GENERATOR</strong><br />
+            <a href="http://localhost:3001/">http://localhost:3001/</a><br />
+            App by Isa Levine<br />
+            <a href="https://github.com/isalevine/">https://github.com/isalevine/</a><br /><br />
+        </Fragment>
+
         let header = <Fragment>
             <strong>Archetype: </strong> {character.archetype_name ? `${character.archetype_name}` : null} <br/>
             <strong>{character.race.alias}: </strong> {character.race ? `${character.race.race}` : null} <br/> 
@@ -29,6 +37,7 @@ class ExtendedCharacter extends Component {
 
         return (
             <Fragment>
+                {credits}
                 {header}
                 {stats}
                 {skills}
@@ -79,14 +88,26 @@ class ExtendedCharacter extends Component {
     }
 
 
+    // code copied from: https://stackoverflow.com/a/12997207
+    handlePrint = () => {
+        var prtContent = document.getElementById("extended-character-card");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+
+
 
     render() {
         return (
             <Fragment>
-              <div className="long-card card-character" style={this.props.style}>
+              <div id="extended-character-card" className="long-card card-character" style={this.props.style}>
                 <div className="long-card-character-text">
-                  {this.parseConvertedCharacter()}
-      
+                    {this.parseConvertedCharacter()}
+                    <button className="print-extended-card-button" onClick={this.handlePrint}>Print!</button>
                 </div>
               </div>
             </Fragment>

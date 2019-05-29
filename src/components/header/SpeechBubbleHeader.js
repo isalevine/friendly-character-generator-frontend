@@ -22,7 +22,3 @@ class SpeechBubbleHeader extends Component {
 }
 
 export default SpeechBubbleHeader
-
-
-{/* <p><strong>Welcome to Friendly Character Generator! Need a new DnD 5th Edition character? We got you covered!</strong></p>
-<strong>To begin creating a new Dungeons and Dragons character, click the "Create New Character!" button below.</strong> */}

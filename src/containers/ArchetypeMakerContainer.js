@@ -30,7 +30,7 @@ class ArchetypeMakerContainer extends Component {
             <Fragment>
                 {this.displayCardDeck()}
                 <div id="archetype-maker-container">
-                    <ArchetypeMakerForm />
+                    <ArchetypeMakerForm history={this.props.history}/>
                 </div>
             </Fragment>
 

@@ -109,7 +109,7 @@ img {
 }
 
 .speech-bubble:after {
-	left: 88.56%;
+	left: 88.45%;
 	bottom: -30px;
 	border: 15px solid;
 	border-color: cornflowerblue transparent transparent cornflowerblue;
@@ -131,9 +131,9 @@ img {
   position: absolute;
   z-index: -1;
   top: 146%;
-  left: 86%;
+  left: 86.2%;
   width: 40px;
-  height: 47px;
+  height: 45px;
   margin: 0;
 }
 
@@ -430,17 +430,18 @@ img {
   top: 84%
 }
 
-
-
-
-
-
-
-
-
-
-
-
+.print-extended-card-button {
+  position: relative;
+  top: 30px;
+  left: 20%;
+  width: 60%;
+  height: 50px;
+  border-color: blue;
+  border-width: 3px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: aquamarine;
+}
 
 
 

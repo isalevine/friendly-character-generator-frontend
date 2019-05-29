@@ -321,7 +321,7 @@ class ArchetypeMakerForm extends Component {
                 <form id="archetype-maker-form-skills" onSubmit={this.formPreventDefault}>
                     <strong>Rank skills by priority.</strong><br />
                     Select duplicates to prioritize similarly-grouped skills.<br />
-                    (ex. magic_computer => Arcana and Religion)<br />
+                    <em>(ex. magic_computer => Arcana and Religion)</em><br />
                     <label name="skill1">Skill #1:</label>
                     <select name="skill1" value={this.state.formData.skills.skill1} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
@@ -346,13 +346,13 @@ class ArchetypeMakerForm extends Component {
                     <select name="skill6" value={this.state.formData.skills.skill6} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
-                    (COMING SOON: cyberpunk expansions via magic_computer)<br />
+                    <em>(COMING SOON: cyberpunk expansions via magic_computer)</em><br />
                 </form><br />
 
 
                 <form id="archetype-maker-form-powers" onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when prioritizing powers.</strong><br />
-                    (ex. "sword", "extra attacks", "fire", etc.)<br />
+                    <em>(ex. "sword", "extra attacks", "fire", etc.)</em><br />
                     <label name="power1">Power #1:</label>
                     <input type="text" name="power1" placeholder="search term" value={this.state.formData.powers.power1} onChange={this.handleChangePowers}/><br />
                     <label name="power2">Power #2:</label>
@@ -370,7 +370,7 @@ class ArchetypeMakerForm extends Component {
 
                 <form id="archetype-maker-form-snippets" onSubmit={this.formPreventDefault}>
                     <strong>Enter up to six terms to use when generating their backstory.</strong><br />
-                    (ex. "mountain", "performing", "fire", etc.)<br />
+                    <em>(ex. "mountain", "performing", "fire", etc.)</em><br />
                     <label name="snippet1">Snippet #1:</label>
                     <input type="text" name="snippet1" placeholder="search term" value={this.state.formData.snippets.snippet1} onChange={this.handleChangeSnippets}/><br />
                     <label name="snippet2">Snippet #2:</label>
@@ -429,15 +429,15 @@ class ArchetypeMakerForm extends Component {
                 <strong>Select search terms for this Archetype.</strong><br />
                    
                 <form id="archetype-maker-form-search-list-playstyle" onSubmit={this.formPreventDefault}>   
-                    Playstyle:<br />
+                    <strong>Playstyle:</strong><br />
                     {this.renderPlaystylePref()}<br />
                 </form>
                 <form id="archetype-maker-form-search-list-action" onSubmit={this.formPreventDefault}>   
-                    Action:<br />
+                    <strong>Action:</strong><br />
                     {this.renderActionPref()}<br />
                 </form>
                 <form id="archetype-maker-form-search-list-power" onSubmit={this.formPreventDefault}>   
-                    Power:<br />
+                    <strong>Power:</strong><br />
                     {this.renderPowerPref()}<br />
                 </form>
                     

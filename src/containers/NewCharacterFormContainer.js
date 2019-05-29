@@ -95,7 +95,7 @@ class NewCharacterFormContainer extends Component {
    componentDidUpdate() {
     // refactor: break fetch into its own separate function?
     if (this.state.loadedGameSystems.length > 0 && this.state.foundArchetype) {
-      debugger
+      // debugger
       console.log("ready to post to converter!!")
       console.log("loadedGameSystems[0]: ", this.state.loadedGameSystems[0])
       // HARDCODED: only sending this.state.loadedGameSystems[0], which is DnD--will need an iterator, plus a way to handle multiple simultaneous fetches...

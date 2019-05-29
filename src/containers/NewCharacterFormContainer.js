@@ -506,20 +506,16 @@ class NewCharacterFormContainer extends Component {
         {this.displayFlippedCharacterCards()}
 
         {this.displayExtendedCharacterCards()}
-
         
-
-
-
-        {this.displaySearchPreferenceOutput()}
-
-        {this.displaySearchListResults()}
-
       </div>
     )
   }
 
 }
+
+// {this.displaySearchPreferenceOutput()}
+
+// {this.displaySearchListResults()}
 
 // {this.displayFoundArchetypeOutput()}
 

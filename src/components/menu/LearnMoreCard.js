@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 
 import LearnMoreButton from './LearnMoreButton'
 import LearnMoreFullSize from './LearnMoreFullSize'
+import LearnMoreWizard from '../art/LearnMoreWizard'
 
 
 class LearnMoreCard extends Component {
@@ -25,9 +26,9 @@ class LearnMoreCard extends Component {
       return (
         <div className="card card-form" style={this.props.style}>
           <div className="card-text">
-            Learn More!
+          <strong>Learn More!</strong>
           </div>
-
+        <LearnMoreWizard />
         <LearnMoreButton toggleDisplayFullSize={this.toggleDisplayFullSize} />
       </div>
       )

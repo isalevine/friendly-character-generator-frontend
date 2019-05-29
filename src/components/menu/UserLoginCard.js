@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import { API_URL, HEADERS } from '../../constants';
 
+import ArchetypeMakerArtist from '../art/ArchetypeMakerArtist'
 
 class UserLoginCard extends Component {
 
@@ -123,8 +124,8 @@ class UserLoginCard extends Component {
     if (localStorage.getItem("user_id") && localStorage.getItem("token")) {
       return (
         <Fragment>
-          <button className="user-logged-in-button" style={{"top": 100}} onClick={this.handleReroute}>Create a new Archetype!</button>
-          <button className="user-logged-in-button" style={{"top": 200}} onClick={this.handleLogout}>Logout</button>
+          <button className="user-logged-in-button" style={{"top": 265}} onClick={this.handleReroute}>Create a new Archetype!</button>
+          <button className="user-logged-in-button" style={{"top": 320}} onClick={this.handleLogout}>Logout</button>
         </Fragment>
       )
     } else {
@@ -132,6 +133,16 @@ class UserLoginCard extends Component {
         <Fragment>
           {this.renderUserLoginForm()}
           {this.renderNewUserForm()}  
+        </Fragment>
+      )
+    }
+  }
+
+  renderArt = () => {
+    if (localStorage.getItem("user_id") && localStorage.getItem("token")) {
+      return (
+        <Fragment>
+          <ArchetypeMakerArtist />
         </Fragment>
       )
     }
@@ -183,11 +194,12 @@ class UserLoginCard extends Component {
           <div className="card card-form" style={this.props.style}>
             <div className="card-text">
 
-              <strong>COMING SOON:</strong><br /><br /><br />
+              <strong>Create a new Archetype!</strong><br /><br /><br />
 
               {this.checkLoggedIn()}
   
             </div>
+            {this.renderArt()}
           </div>
         </Fragment>
       )

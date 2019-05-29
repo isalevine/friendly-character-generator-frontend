@@ -17,6 +17,10 @@ import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
 import ConvertedCharacter from '../components/characters/ConvertedCharacter'
+import ExtendedCharacter from '../components/characters/ExtendedCharacter'
+import CardFloatingIsland from '../components/art/CardFloatingIsland'
+import DeckFloatingIsland from '../components/art/DeckFloatingIsland'
+
 
 
 // change "physical" to "fight" as part of playstyle refactoring??
@@ -29,7 +33,7 @@ import ConvertedCharacter from '../components/characters/ConvertedCharacter'
 // (or something else more general...maybe CardContainer??)
 // ...I think this will end up holding state for BOTH forms & characters...
 
-class FormContainer extends Component {
+class NewCharacterFormContainer extends Component {
 
   constructor() {
     super()
@@ -60,6 +64,7 @@ class FormContainer extends Component {
       loadedGameSystems: [],
       convertedCharacters: [],
       backstoriesGenerated: false,
+      showExtendedCharacter: false,
 
     }
     this.flipCard = this.flipCard.bind(this)
@@ -75,6 +80,8 @@ class FormContainer extends Component {
     this.displaySearchListResults = this.displaySearchListResults.bind(this)
     this.displayFoundArchetypeOutput = this.displayFoundArchetypeOutput.bind(this)
     this.displayFlippedCharacterCards = this.displayFlippedCharacterCards.bind(this)
+    this.displayExtendedCharacterCards = this.displayExtendedCharacterCards.bind(this)
+    this.changeShowExtendedCharacter = this.changeShowExtendedCharacter.bind(this)
   }
 
   // fetch GameSystem on first load
@@ -88,6 +95,7 @@ class FormContainer extends Component {
    componentDidUpdate() {
     // refactor: break fetch into its own separate function?
     if (this.state.loadedGameSystems.length > 0 && this.state.foundArchetype) {
+      debugger
       console.log("ready to post to converter!!")
       console.log("loadedGameSystems[0]: ", this.state.loadedGameSystems[0])
       // HARDCODED: only sending this.state.loadedGameSystems[0], which is DnD--will need an iterator, plus a way to handle multiple simultaneous fetches...
@@ -271,7 +279,7 @@ class FormContainer extends Component {
       form.style.left = "6px"
     })
     let div = document.getElementById('deck-click-here-box')
-    div.classList.add('fadeout-effect')
+    // div.classList.add('fadeout-effect')
   }
 
 
@@ -338,16 +346,20 @@ class FormContainer extends Component {
   displayCardDeck() {
     return (
       <div className="deck-of-cards">
-        <CardDeck style={{"top": "0px", "left": "0px", "zIndex": 1}} />
-        <CardDeck style={{"top": "6px", "left": "5px", "zIndex": 2}} />
-        <CardDeck style={{"top": "12px", "left": "10px", "zIndex": 4}} />
-        <CardDeck style={{"top": "18px", "left": "15px", "zIndex": 5}} />
+        <CardDeck style={{"top": "0px", "left": "0px", "zIndex": 2}} />
+        <CardDeck style={{"top": "6px", "left": "5px", "zIndex": 3}} />
+        <CardDeck style={{"top": "12px", "left": "10px", "zIndex": 5}} />
+        <CardDeck style={{"top": "18px", "left": "15px", "zIndex": 6}} />
           <ClickHereMessage
             style={{"position": "absolute", "top": "0px", "left": "0px", "zIndex": 6}}
             flipCard={this.flipCard}
             nextCard={this.state.nextCard}
             fetchGameSystem={this.fetchGameSystem}
+            convertedCharacters={this.state.convertedCharacters}
+            history={this.props.history}
           />
+
+          <DeckFloatingIsland style={{"top": 380, "left": -37}} />
       </div>
     )
   }
@@ -380,12 +392,20 @@ class FormContainer extends Component {
       //   card4 = <BlankCard style={{"top": 6, "left": 1110}} />
       // }
 
+      let island1 = <CardFloatingIsland style={{"top": 390, "left": 290}}/>
+      let island2 = <CardFloatingIsland style={{"top": 390, "left": 560}}/>
+      let island3 = <CardFloatingIsland style={{"top": 390, "left": 830}}/>
+
       return (
         <Fragment>
           {card1}
           {card2}
           {card3}
           {card4}
+
+          {island1}
+          {island2}
+          {island3}
         </Fragment>
       )
     }
@@ -396,19 +416,20 @@ class FormContainer extends Component {
   displaySearchPreferenceOutput() {
     return (
       <SearchPreferenceOutput
-        style={{"position": "absolute", "left": 80, "top": 460}}
+        style={{"position": "absolute", "left": 1280, "top": 460}}
         formSearchPreference={this.state.formSearchPreference}
       />
     )
   }
 
 
+  // originally: style={{"position": "absolute", "left": 440, "top": 460}}
   displaySearchListResults() {
     let searchListResults;
     if (this.state.matchedSearchList.match_found) {
       return (
         <SearchListResults
-          style={{"position": "absolute", "left": 440, "top": 460}}
+          style={{"position": "absolute", "left": 1280, "top": 660}}
           SearchList={this.state.matchedSearchList}
         />
       )
@@ -431,26 +452,52 @@ class FormContainer extends Component {
 
 
   displayFlippedCharacterCards() {
-    let card1;
+    let card3;
     // HARDCODED to only render 1 card, with only convertedCharacters[0]
     if (this.state.convertedCharacters.length > 0) {
-      card1 = <ConvertedCharacter style={{"top": 6, "left": 300}}
+      card3 = <ConvertedCharacter style={{"top": 6, "left": 840}}
+        convertedCharacter={this.state.convertedCharacters[0]}
+        changeShowExtendedCharacter={this.changeShowExtendedCharacter}
+      />
+    }
+
+    return (
+      <Fragment>
+        {card3}
+      </Fragment>
+    )
+  }
+
+
+  displayExtendedCharacterCards() {
+    let card2;
+    // HARDCODED to only render 1 card, with only convertedCharacters[0], at card2 location (left: 570)
+    if (this.state.convertedCharacters.length > 0 && this.state.showExtendedCharacter) {
+      card2 = <ExtendedCharacter style={{"top": 6, "left": 300}}
         convertedCharacter={this.state.convertedCharacters[0]}
       />
     }
 
     return (
       <Fragment>
-        {card1}
+        {card2}
       </Fragment>
     )
   }
 
 
+  changeShowExtendedCharacter() {
+    this.setState({showExtendedCharacter: true})
+  }
+
+
+  
+
+
   render() {
 
     return (
-      <div id="form-container">
+      <div id="new-character-form-container" className="container">
 
         {this.displayCardDeck()}
 
@@ -458,17 +505,18 @@ class FormContainer extends Component {
 
         {this.displayFlippedCharacterCards()}
 
-        {this.displaySearchPreferenceOutput()}
-
-        {this.displaySearchListResults()}
-
-        {this.displayFoundArchetypeOutput()}
-
+        {this.displayExtendedCharacterCards()}
+        
       </div>
     )
   }
 
 }
 
+// {this.displaySearchPreferenceOutput()}
 
-export default FormContainer
+// {this.displaySearchListResults()}
+
+// {this.displayFoundArchetypeOutput()}
+
+export default NewCharacterFormContainer

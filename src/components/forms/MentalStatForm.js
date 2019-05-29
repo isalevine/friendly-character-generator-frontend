@@ -14,7 +14,7 @@ class MentalStatForm extends Component {
     return (
       <Fragment>
         <form id="mental-stat-form" onChange={this.handleChange}>
-          b. When thinking and solving puzzles, I like to...<br />
+        <strong>b. When thinking and solving puzzles, I like to...</strong><br />
         <input type="radio" name="mental-stat-form" value="spells" />cast lots of spells! / use lots of technology!<br />
           <input type="radio" name="mental-stat-form" value="investigate" />find clues and notice important details!<br />
           <input type="radio" name="mental-stat-form" value="knowledge" />know lots about any topic!<br />

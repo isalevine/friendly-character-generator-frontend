@@ -14,7 +14,7 @@ class SocialStatForm extends Component {
     return (
       <Fragment>
         <form id="social-stat-form" onChange={this.handleChange}>
-          c. When talking as my character, I like to...<br />
+        <strong>c. When talking as my character, I like to...</strong><br />
         <input type="radio" name="social-stat-form" value="leader" />be an inspiring leader!<br />
           <input type="radio" name="social-stat-form" value="perform" />be a performer! / be in disguise!<br />
           <input type="radio" name="social-stat-form" value="manipulate" />lie and manipulate others!<br />

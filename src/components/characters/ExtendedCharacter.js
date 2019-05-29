@@ -1,15 +1,13 @@
 import React, { Component, Fragment} from 'react'
 
-import ShowExtendedCharacterButton from './ShowExtendedCharacterButton'
-import CharacterPortrait from './CharacterPortrait'
+import CharacterPortraitExtended from './CharacterPortraitExtended'
 
 
-class ConvertedCharacter extends Component {
+// code copied almost completely from ConvertedCharacter.js
+class ExtendedCharacter extends Component {
 
     parseConvertedCharacter = () => {
         let character = this.props.convertedCharacter
-
-        console.log(character)
 
         let header = <Fragment>
             <strong>Archetype: </strong> {character.archetype_name ? `${character.archetype_name}` : null} <br/>
@@ -27,17 +25,17 @@ class ConvertedCharacter extends Component {
 
         let backstory = <Fragment>{this.renderBackstory(character)}</Fragment>
 
-        let portrait = <Fragment>{character.img_url ? <CharacterPortrait img_url={character.img_url}/> : null }</Fragment>
-
+        let portrait = <Fragment>{character.img_url ? <CharacterPortraitExtended img_url={character.img_url}/> : null }</Fragment>
 
         return (
             <Fragment>
                 {header}
-                {/* {stats}
+                {stats}
                 {skills}
                 {powers}
                 {unique}
-                {backstory} */}
+                {backstory}
+                <br /><br /><br />
                 {portrait}
             </Fragment>
         )
@@ -65,7 +63,7 @@ class ConvertedCharacter extends Component {
         let alias = `${character.powers.alias} list: `
         let power_array = character.powers.list
         let list = power_array.map(power => {
-            return <li key={Math.random()} >{`${power.name}: (Roll/Rules: ${power.roll}) ${power.description}`}</li>
+            return <li key={Math.random()} > <strong>{power.name}:</strong> <br/> <em>(Roll/Rules: {power.roll})</em> <br/> {power.description}</li>
         })
         return <Fragment><strong>{alias}</strong><ul className="character-list">{list}</ul></Fragment>
     }
@@ -85,11 +83,11 @@ class ConvertedCharacter extends Component {
     render() {
         return (
             <Fragment>
-              <div className="card card-character" style={this.props.style}>
-                <div className="card-character-text">
-                    {this.parseConvertedCharacter()}
+              <div className="long-card card-character" style={this.props.style}>
+                <div className="long-card-character-text">
+                  {this.parseConvertedCharacter()}
+      
                 </div>
-                <ShowExtendedCharacterButton changeShowExtendedCharacter={this.props.changeShowExtendedCharacter}/>
               </div>
             </Fragment>
           )
@@ -97,4 +95,4 @@ class ConvertedCharacter extends Component {
 }
 
 
-export default ConvertedCharacter
+export default ExtendedCharacter

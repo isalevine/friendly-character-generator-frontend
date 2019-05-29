@@ -14,10 +14,10 @@ class SearchPreferenceOutput extends Component {
     return (
       <div id="search-preference-output" className="form-search-outputs" style={this.props.style}>
         <h4>SearchPreference Output:</h4>
-          playstyle_preference: {this.props.formSearchPreference.playstyle_preference}<br />
-          action_preference: {this.props.formSearchPreference.action_preference}<br />
-          stat_preference: {this.props.formSearchPreference.stat_preference}<br />
-          power_preference: {this.props.formSearchPreference.power_preference}
+          <strong>playstyle_preference:</strong> {this.props.formSearchPreference.playstyle_preference}<br />
+          <strong>action_preference:</strong> {this.props.formSearchPreference.action_preference}<br />
+          <strong>stat_preference:</strong> {this.props.formSearchPreference.stat_preference}<br />
+          <strong>power_preference:</strong> {this.props.formSearchPreference.power_preference}
 
       </div>
     )

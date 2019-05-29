@@ -132,6 +132,7 @@ class UserLoginCard extends Component {
       return (
         <Fragment>
           {this.renderUserLoginForm()}
+          <br />
           {this.renderNewUserForm()}  
         </Fragment>
       )
@@ -151,7 +152,7 @@ class UserLoginCard extends Component {
   renderUserLoginForm = () => {
     return (
       <form id="user-login-form" onSubmit={this.handleSubmitLogin}>
-        <strong>Login to create new character Archetypes!</strong><br />
+        <strong>Login to create Archetypes:</strong><br />
         <label>Username</label>
         <input type="text" onChange={this.handleChangeLogin} name="username" value={this.state.loginForm.username}/><br />
         <label>Password</label>
@@ -170,9 +171,9 @@ class UserLoginCard extends Component {
         <input type="text" name="username" onChange={this.handleChangeNewUser} value={this.state.newUserForm.username}/><br />
         <label>Password</label>
         <input type="password" name="password" onChange={this.handleChangeNewUser} value={this.state.newUserForm.password}/><br />
-        <label>Email address</label>
+        <label>Email</label>
         <input type="email" name="email" onChange={this.handleChangeNewUser} value={this.state.newUserForm.email}/><br />
-        <label>Real name</label>
+        <label>Name</label>
         <input type="text" name="name" onChange={this.handleChangeNewUser} value={this.state.newUserForm.name}/><br />
         <label>Bio</label>
         <input type="text" name="bio" onChange={this.handleChangeNewUser} value={this.state.newUserForm.bio}/><br />

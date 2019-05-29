@@ -14,6 +14,7 @@ class ArchetypeMakerForm extends Component {
             formData: {
                 general: {
                     name: "",
+                    img_url: ""
                 },
                 stats: {
                     stat1: "strength",
@@ -276,11 +277,14 @@ class ArchetypeMakerForm extends Component {
     render() {
         return (
             <div id="archetype-maker-all-forms">
-                This is the form div
+                <strong>NEW ARCHETYPE</strong><br /><br />
 
                 <form id="archetype-maker-form-general"  onSubmit={this.formPreventDefault}>
                     <label name="name"><strong>Archetype Name:</strong></label><br />
-                    <input type="text" name="name" placeholder="archetype name" onChange={this.handleChangeGeneral}/>
+                    <input type="text" name="name" placeholder="archetype name" onChange={this.handleChangeGeneral}/><br />
+                    <br />
+                    <label name="img_url"><strong>Image URL:</strong></label><br />
+                    <input type="text" name="img_url" placeholder="image URL" onChange={this.handleChangeGeneral}/>
                 </form><br />
 
 
@@ -406,15 +410,15 @@ class ArchetypeMakerForm extends Component {
 
                     <br />
                     <strong>DnD system-specific skill preferences:</strong><br />
-                    <label name="dnd_skill1">DnD Skill Preference #1:</label>
+                    <label name="dnd_skill1">Preference #1:</label>
                     <select name="dnd_skill1" value={this.state.formData.systemUniqueDnd.dnd_skill1} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
-                    <label name="dnd_skill2">DnD Skill Preference #2:</label>
+                    <label name="dnd_skill2">Preference #2:</label>
                     <select name="dnd_skill2" value={this.state.formData.systemUniqueDnd.dnd_skill2} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
-                    <label name="dnd_skill3">DnD Skill Preference #3:</label>
+                    <label name="dnd_skill3">Preference #3:</label>
                     <select name="dnd_skill3" value={this.state.formData.systemUniqueDnd.dnd_skill3} onChange={this.handleChangeSystemUniqueDnd}>
                         {this.renderDndSkillList()}
                     </select><br />
@@ -422,7 +426,7 @@ class ArchetypeMakerForm extends Component {
 
                 
 
-                <strong>Select search terms that can match users to this Archetype.</strong><br />
+                <strong>Select search terms for this Archetype.</strong><br />
                    
                 <form id="archetype-maker-form-search-list-playstyle" onSubmit={this.formPreventDefault}>   
                     Playstyle:<br />

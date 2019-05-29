@@ -1,6 +1,7 @@
 import React, { Component, Fragment} from 'react'
 
 import ShowExtendedCharacterButton from './ShowExtendedCharacterButton'
+import CharacterPortrait from './CharacterPortrait'
 
 
 class ConvertedCharacter extends Component {
@@ -26,15 +27,18 @@ class ConvertedCharacter extends Component {
 
         let backstory = <Fragment>{this.renderBackstory(character)}</Fragment>
 
+        let portrait = <Fragment>{character.img_url ? <CharacterPortrait img_url={character.img_url}/> : null }</Fragment>
+
 
         return (
             <Fragment>
                 {header}
-                {stats}
+                {/* {stats}
                 {skills}
                 {powers}
                 {unique}
-                {backstory}
+                {backstory} */}
+                {portrait}
             </Fragment>
         )
     }

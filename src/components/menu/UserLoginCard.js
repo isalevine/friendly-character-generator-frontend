@@ -123,8 +123,8 @@ class UserLoginCard extends Component {
     if (localStorage.getItem("user_id") && localStorage.getItem("token")) {
       return (
         <Fragment>
-          <button onClick={this.handleReroute}>Create a new Archetype!</button>
-          <button onClick={this.handleLogout}>Logout</button>
+          <button className="user-logged-in-button" style={{"top": 100}} onClick={this.handleReroute}>Create a new Archetype!</button>
+          <button className="user-logged-in-button" style={{"top": 200}} onClick={this.handleLogout}>Logout</button>
         </Fragment>
       )
     } else {

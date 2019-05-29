@@ -427,20 +427,19 @@ class ArchetypeMakerForm extends Component {
                 <form id="archetype-maker-form-search-list-playstyle" onSubmit={this.formPreventDefault}>   
                     Playstyle:<br />
                     {this.renderPlaystylePref()}<br />
-                </form><br />
+                </form>
                 <form id="archetype-maker-form-search-list-action" onSubmit={this.formPreventDefault}>   
                     Action:<br />
                     {this.renderActionPref()}<br />
-                </form><br />
+                </form>
                 <form id="archetype-maker-form-search-list-power" onSubmit={this.formPreventDefault}>   
                     Power:<br />
                     {this.renderPowerPref()}<br />
-                </form><br />
+                </form>
                     
 
 
-                <br /><br />
-                <button onClick={this.handleSubmit}>Create Archetype!</button>
+                <button id="archetype-card-button" onClick={this.handleSubmit}>Create Archetype!</button>
 
             </div>
         )

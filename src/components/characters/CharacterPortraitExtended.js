@@ -6,7 +6,7 @@ class CharacterPortraitExtended extends Component {
     render() {
         return (
             <Fragment>
-                <img className="character-portrait-extended" src={this.props.img_url} />
+                <img className="character-portrait-extended" alt="character portrait" src={this.props.img_url} />
             </Fragment>
         )
     }

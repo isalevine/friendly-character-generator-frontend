@@ -6,7 +6,7 @@ class DeckFloatingIsland extends Component {
     render() {
         return (
             <Fragment>
-                <img id="deck-floating-island" src="../../pixel-art/floating-island-1-edited.png" style={this.props.style}/>
+                <img id="deck-floating-island" alt="pixel-art floating island" src="../../pixel-art/floating-island-1-edited.png" style={this.props.style}/>
             </Fragment>
         )
     }

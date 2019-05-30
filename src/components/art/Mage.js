@@ -6,7 +6,7 @@ class Mage extends Component {
     render() {
         return (
             <Fragment>
-                <img id="mage" src="../../pixel-art/unit-mage-1.png" />
+                <img id="mage" alt="pixel-art mage" src="../../pixel-art/unit-mage-1.png" />
             </Fragment>
         )
     }

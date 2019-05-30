@@ -6,7 +6,7 @@ class NewCharacterKnight extends Component {
     render() {
         return (
         <Fragment>
-            <img className="card-art" src="../../public-domain-art/grey-dolphin.jpg" style={this.props.style}/>
+            <img className="card-art" alt="etch-drawing knight" src="../../public-domain-art/grey-dolphin.jpg" style={this.props.style}/>
         </Fragment>
         )
     }

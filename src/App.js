@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+// import ReactDOM from 'react-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 // import OldMainPage from './components/OldMainPage'
@@ -51,23 +51,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-// <div className="header navbar">
-//   <p><strong>Welcome to Friendly Character Generator! Need a new DnD 5th Edition character? We got you covered!</strong></p>
-//   <strong>To begin creating a new Dungeons and Dragons character, click the deck below.</strong>
-// </div>
-
-
-{/* <div id="fond" style={{"marginLeft": "25%"}}>
-<div id="fume">
-  <div id="masque"
-  ></div>
-</div>
-</div> */}
-
-
-          
-
-
-

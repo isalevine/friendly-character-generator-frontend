@@ -3,16 +3,16 @@ import React, {Component, Fragment} from 'react'
 import {API_URL, CONVERTER_URL, HEADERS} from '../constants/index'
 
 import CardDeck from '../components/cards/CardDeck'
-import BlankCard from '../components/cards/BlankCard'
+// import BlankCard from '../components/cards/BlankCard'
 import ClickHereMessage from '../components/cards/ClickHereMessage'
 
-import TestForm from '../components/forms/TestForm'
+// import TestForm from '../components/forms/TestForm'
 import StatForm from '../components/forms/StatForm'
-import PhysicalStatForm from '../components/forms/PhysicalStatForm'
-import MentalStatForm from '../components/forms/MentalStatForm'
-import SocialStatForm from '../components/forms/SocialStatForm'
+// import PhysicalStatForm from '../components/forms/PhysicalStatForm'
+// import MentalStatForm from '../components/forms/MentalStatForm'
+// import SocialStatForm from '../components/forms/SocialStatForm'
 import PowerForm from '../components/forms/PowerForm'
-import FilterForm from '../components/forms/FilterForm'
+// import FilterForm from '../components/forms/FilterForm'
 import SearchPreferenceOutput from '../components/forms/SearchPreferenceOutput'
 import SearchListResults from '../components/forms/SearchListResults'
 import FoundArchetypeOutput from '../components/forms/FoundArchetypeOutput'
@@ -278,7 +278,7 @@ class NewCharacterFormContainer extends Component {
       form.style.transition = "2s linear"
       form.style.left = "6px"
     })
-    let div = document.getElementById('deck-click-here-box')
+    // let div = document.getElementById('deck-click-here-box')
     // div.classList.add('fadeout-effect')
   }
 
@@ -424,7 +424,7 @@ class NewCharacterFormContainer extends Component {
 
   // originally: style={{"position": "absolute", "left": 440, "top": 460}}
   displaySearchListResults() {
-    let searchListResults;
+    // let searchListResults;
     if (this.state.matchedSearchList.match_found) {
       return (
         <SearchListResults

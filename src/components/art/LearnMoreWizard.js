@@ -6,7 +6,7 @@ class LearnMoreWizard extends Component {
     render() {
         return (
         <Fragment>
-            <img className="card-art" src="../../public-domain-art/wizard-sigh.jpg" style={this.props.style}/>
+            <img className="card-art" alt="etch-drawing scholar" src="../../public-domain-art/wizard-sigh.jpg" style={this.props.style}/>
         </Fragment>
         )
     }

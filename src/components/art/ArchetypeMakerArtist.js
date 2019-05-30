@@ -6,7 +6,7 @@ class ArchetypeMakerArtist extends Component {
     render() {
         return (
         <Fragment>
-            <img className="card-art" src="../../public-domain-art/pressure-fingers.jpg" style={this.props.style}/>
+            <img className="card-art" alt="etch-drawing sculptor" src="../../public-domain-art/pressure-fingers.jpg" style={this.props.style}/>
         </Fragment>
         )
     }

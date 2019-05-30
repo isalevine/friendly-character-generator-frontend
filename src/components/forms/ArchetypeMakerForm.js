@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 
-import {API_URL, CONVERTER_URL, HEADERS} from '../../constants/index'
+import {API_URL} from '../../constants/index'
 
 
 

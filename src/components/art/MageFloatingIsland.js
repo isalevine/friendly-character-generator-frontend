@@ -8,7 +8,7 @@ class MageFloatingIsland extends Component {
     render() {
         return (
             <Fragment>
-                <img id="mage-floating-island" src="../../pixel-art/floating-island-3-edited.png" />
+                <img id="mage-floating-island" alt="pixel-art floating island" src="../../pixel-art/floating-island-3-edited.png" />
 
                 <Mage />
             </Fragment>

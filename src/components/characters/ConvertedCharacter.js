@@ -17,15 +17,15 @@ class ConvertedCharacter extends Component {
             <strong>{character.class.alias}: </strong> {character.class ? `${character.class.class}` : null} <br/><br/>
         </Fragment>
 
-        let stats = <Fragment>{character.stats ? this.renderStatList(character) : null}</Fragment>
+        // let stats = <Fragment>{character.stats ? this.renderStatList(character) : null}</Fragment>
 
-        let skills = <Fragment>{character.skills ? this.renderSkillList(character) : null}</Fragment>
+        // let skills = <Fragment>{character.skills ? this.renderSkillList(character) : null}</Fragment>
 
-        let powers = <Fragment>{character.skills ? this.renderPowerList(character) : null}</Fragment>
+        // let powers = <Fragment>{character.skills ? this.renderPowerList(character) : null}</Fragment>
 
-        let unique;
+        // let unique;
 
-        let backstory = <Fragment>{this.renderBackstory(character)}</Fragment>
+        // let backstory = <Fragment>{this.renderBackstory(character)}</Fragment>
 
         let portrait = <Fragment>{character.img_url ? <CharacterPortrait img_url={character.img_url}/> : null }</Fragment>
 

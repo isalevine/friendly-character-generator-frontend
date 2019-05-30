@@ -10,7 +10,7 @@ Additionally, users can create an account and log in to contribute new character
   
 The backend repo can be found here: [https://github.com/isalevine/friendly-character-generator-backend-api](https://github.com/isalevine/friendly-character-generator-backend-api)  
 
-Feedback on the user interface can be provided here--thank you for contributing your thoughts! [https://docs.google.com/forms/d/1G-32PU9rA9AI2VQagWZcQThJr8zCNH0Z_0IBkdnQw7I/edit#responses](https://docs.google.com/forms/d/1G-32PU9rA9AI2VQagWZcQThJr8zCNH0Z_0IBkdnQw7I/edit#responses)
+Feedback on the user interface can be provided here--thank you for contributing your thoughts! [https://docs.google.com/forms/d/e/1FAIpQLSdg1O0oTrSRAHZcxhcH8T4-rmpXYbVCo1-fckenq2gu37UIJw/viewform?usp=sf_link](https://docs.google.com/forms/d/e/1FAIpQLSdg1O0oTrSRAHZcxhcH8T4-rmpXYbVCo1-fckenq2gu37UIJw/viewform?usp=sf_link)
   
 
 ## Overview

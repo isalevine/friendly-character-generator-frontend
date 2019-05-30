@@ -90,7 +90,7 @@ class ArchetypeMakerForm extends Component {
                 }
             },
             playstyle_pref_options: ["physical", "mental", "social"],
-            action_pref_options: ["weapon", "tank", "sneak", "spells", "investigate", "knowledge", "leader", "perform", "manipulate", "seduce"],
+            action_pref_options: ["weapon (physical)", "tank (physical)", "sneak (physical)", "spells (physical/mental)", "investigate (mental)", "knowledge (mental)", "leader (social)", "perform (social)", "manipulate (social)", "seduce (social)"],
             stat_pref_options: ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"],
             power_pref_options: ["damage", "heal", "stealth", "mind", "control", "any"],
             
@@ -284,7 +284,7 @@ class ArchetypeMakerForm extends Component {
                 <form id="archetype-maker-form-general"  onSubmit={this.formPreventDefault}>
                     <label name="name"><strong>Archetype Name:</strong></label><br />
                     <input type="text" name="name" placeholder="archetype name" onChange={this.handleChangeGeneral}/><br />
-                    <br />
+
                     <label name="img_url"><strong>Image URL:</strong></label><br />
                     <input type="text" name="img_url" placeholder="image URL" onChange={this.handleChangeGeneral}/>
                 </form><br />
@@ -348,7 +348,6 @@ class ArchetypeMakerForm extends Component {
                     <select name="skill6" value={this.state.formData.skills.skill6} onChange={this.handleChangeSkills}>
                         {this.renderSkillOptions()}
                     </select><br />
-                    <em>(COMING SOON: cyberpunk expansions via magic_computer)</em><br />
                 </form><br />
 
 

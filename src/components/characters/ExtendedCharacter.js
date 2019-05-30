@@ -12,7 +12,7 @@ class ExtendedCharacter extends Component {
         let credits = 
         <Fragment>
             <strong>CREATED BY FRIENDLY CHARACTER GENERATOR</strong><br />
-            <a href="http://localhost:3001/">http://localhost:3001/</a><br />
+            <a href="https://friendly-character-generator.herokuapp.com/">https://friendly-character-generator.herokuapp.com/</a><br />
             App by Isa Levine<br />
             <a href="https://github.com/isalevine/">https://github.com/isalevine/</a><br /><br />
         </Fragment>

@@ -8,7 +8,8 @@ When creating a new character, users are asked simple and straightforward questi
 
 Additionally, users can create an account and log in to contribute new character Archetypes to the system for others to use!
   
-  
+The backend repo can be found here: [https://github.com/isalevine/friendly-character-generator-backend-api](https://github.com/isalevine/friendly-character-generator-backend-api)  
+
 
 ## Overview
 
@@ -44,7 +45,7 @@ Additionally, users can create an account and log in to contribute new character
 
 * Make sure you have the Ruby backend cloned down, installed, and running on localhost:3000. [Directions can be found here.](https://github.com/isalevine/friendly-character-generator-backend-api)
 
-* Run ```npm start``` or ```yarn start``` to start the app on localhost:3001.
+* Run ```npm start``` or ```yarn start``` to start the app on localhost:3001. **NOTE: You may need to change line 1 in /constants/index.js so that the API_URL points to localhost:3001, instead of https://friendly-char-gen-backend-api.herokuapp.com where it is currently deployed!**
 
 * Open your browser (Chrome recommended), and navigate to localhost:3001 to create characters and contribute new Archetypes!
 
@@ -91,3 +92,4 @@ https://pm1.narvii.com/6802/a6d3c9a8e762d8a55e1418a04521feb166c6c631v2_hq.jpg
 https://i.pinimg.com/originals/f2/9d/7c/f29d7c6b070ebb09143387258e9b0de9.png
 http://25.media.tumblr.com/a9abdc846ff91adbe3c00505e9db3c0d/tumblr_n0fso0bACm1r5yty8o1_1280.jpg
 https://www.midnightpulp.com/wp-content/uploads/2018/03/drunken-master-slippery-snake_channel_poster.jpg
+https://vignette.wikia.nocookie.net/xmenmovies/images/0/03/Sorry_about_this_image_.jpeg/revision/latest?cb=20160917235448

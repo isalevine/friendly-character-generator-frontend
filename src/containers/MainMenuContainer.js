@@ -13,6 +13,11 @@ import DeckFloatingIsland from '../components/art/DeckFloatingIsland'
 
 class MainMenuContainer extends Component {
 
+  // constructor() {
+  //   super()
+  //   this.disableForms = this.disableForms.bind(this)
+  // }
+
   disableForms() {
     let forms = Array.from(document.getElementsByClassName("card-form"))
     forms.forEach(form => {
@@ -20,8 +25,8 @@ class MainMenuContainer extends Component {
       form.style.transition = "2s linear"
       form.style.left = "6px"
     })
-    let div = document.getElementById('deck-click-here-box')
-    div.classList.add('fadeout-effect')
+    // let div = document.getElementById('deck-click-here-box')
+    // div.classList.add('fadeout-effect')
   }
 
 
@@ -39,7 +44,7 @@ class MainMenuContainer extends Component {
     }
 
     displayNewCharacterCard() {
-        let card1 = <NewCharacterCard style={{"top": 6, "left": 300}} history={this.props.history}/>
+        let card1 = <NewCharacterCard style={{"top": 6, "left": 300}} history={this.props.history} disableForms={this.disableForms}/>
         let island1 = <CardFloatingIsland style={{"top": 390, "left": 290}}/>
         return (
           <Fragment>

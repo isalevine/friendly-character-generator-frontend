@@ -271,6 +271,8 @@ class NewCharacterFormContainer extends Component {
   }
 
 
+  // this function has been copied over to the Main Menu to animate the cards--
+  // REFACTOR to make one animation, possibly in CSS??
   disableForms() {
     let forms = Array.from(document.getElementsByClassName("card-form"))
     forms.forEach(form => {

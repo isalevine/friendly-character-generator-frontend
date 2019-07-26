@@ -14,7 +14,7 @@ class NewCharacterCard extends Component {
                 <strong>Create a New Character!</strong>
             </div>
             <NewCharacterKnight />
-            <NewCharacterButton history={this.props.history}/>
+            <NewCharacterButton history={this.props.history} disableForms={this.props.disableForms}/>
           </div>
         </Fragment>
       )

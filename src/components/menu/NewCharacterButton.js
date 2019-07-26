@@ -4,7 +4,9 @@ import React, {Component, Fragment} from 'react'
 class NewCharacterButton extends Component {
 
     handleClick = () => {
-        this.props.history.push('/new_character')
+        this.props.disableForms()
+        
+        setTimeout( () => this.props.history.push('/new_character'), 2000)
     }
 
     render() {

@@ -47,7 +47,7 @@ Feedback on the user interface can be provided here--thank you for contributing 
 
 * Make sure you have the Ruby backend cloned down, installed, and running on localhost:3000. [Directions can be found here.](https://github.com/isalevine/friendly-character-generator-backend-api)
 
-* Run ```npm start``` or ```yarn start``` to start the app on localhost:3001. **NOTE: You may need to /constants/index.js so that the API_URL points to "http://localhost:3001", instead of "https://friendly-char-gen-backend-api.herokuapp.com" where it is currently deployed!**
+* Run ```npm start``` or ```yarn start``` to start the app on localhost:3000. **NOTE: You may need to /constants/index.js so that the API_URL points to "http://localhost:3000", instead of "https://friendly-char-gen-backend-api.herokuapp.com" where it is currently deployed!**
 
 * Open your browser (Chrome recommended), and navigate to localhost:3001 to create characters and contribute new Archetypes!
 
